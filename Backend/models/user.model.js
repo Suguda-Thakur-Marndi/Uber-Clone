@@ -1,4 +1,6 @@
 const mongoose=require('mongoose');
+const bycrpt=require('bcrypt');
+const jwt=require('jsonwebtoken');
 const userSchema=new mongoose.Schema({
     fullname:{
      firstname:{
@@ -20,11 +22,23 @@ const userSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true,
+        select:false,
+        minlength:[6,'password must be at least 6 characters']
        
     },
   socketId:{
     type:String,
   }
 });
-const User=mongoose.model('User',userSchema);
+userSchema.methods.generateAuthToken=function(){
+    const token=jwt.sign({_id:this._id},process.env.JWT_SECRET,{expiresIn:'1h'});
+    return token;
+}
+userSchema.methods.comparePassword=async function(password){
+    return await bycrpt.compare(password,this.password);
+}
+userSchemastatic.hashPassword=async function(password){
+    return await bycrpt.hash(password,10);
+}
+const User=mongoose.model('user',userSchema);
 module.exports=User;

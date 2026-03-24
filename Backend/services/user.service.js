@@ -1,0 +1,15 @@
+const User=require('../models/user.model');
+module.exports.createUser=async(firstname,lastname,email,password)=>{
+   if(!firstname || !email || !password){
+    throw new Error('Missing required fields: firstname, email, and password are required');
+   }
+   const user=usermodel.create({
+    fullname:{
+        firstname,
+        lastname
+    },
+    email,
+    password:await usermodel.hashPassword(password)
+   });
+   return user; 
+};
