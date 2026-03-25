@@ -25,4 +25,30 @@ module.exports.registerUser=async(req,res)=>{
         token
     });
 }
+module.exports.loginUser=async(req,res)=>{
+    const { email, password }=req.body;
+    if(!email || !password){
+        return res.status(400).json({
+            message:'Email and password are required'
+        });
+    }
+    const user=await User.findOne({email}).select('+password');
+    if(!user){
+        return res.status(401).json({
+            message:'Invalid email or password'
+        });
+    }
+    const isMatch=await user.comparePassword(password);
+    if(!isMatch){
+        return res.status(401).json({
+            message:'Invalid email or password'
+        });
+    }
+    const token=user.generateAuthToken();
+    res.json({
+        message:'Login successful',
+        userId:user._id,
+        token
+    });
+}
    
