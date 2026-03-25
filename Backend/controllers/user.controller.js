@@ -8,19 +8,21 @@ module.exports.registerUser=async(req,res)=>{
             errors:errors.array()
         })
     }
-    const {firstname,lastname,email,password}=req.body;
+    const { fullname, email, password }=req.body;
     const hashedPassword=await User.hashPassword(password);
 
-  const user=await userService.createUser(firstname,lastname,email,hashedPassword);
-  res.status(201).json({
-    message:'User registered successfully',
-    userId:user._id
-  });
-const token=user.generateAuthToken();
-res.status(201).json({
-    message:'User registered successfully',
-    userId:user._id,
-    token
-  });
+    const user=await userService.createUser(
+        fullname.firstname,
+        fullname.lastname,
+        email,
+        hashedPassword
+    );
+
+    const token=user.generateAuthToken();
+    res.status(201).json({
+        message:'User registered successfully',
+        userId:user._id,
+        token
+    });
 }
    

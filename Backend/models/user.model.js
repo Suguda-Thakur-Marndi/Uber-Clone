@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const bycrpt=require('bcrypt');
+const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const userSchema=new mongoose.Schema({
     fullname:{
@@ -35,10 +35,10 @@ userSchema.methods.generateAuthToken=function(){
     return token;
 }
 userSchema.methods.comparePassword=async function(password){
-    return await bycrpt.compare(password,this.password);
+    return await bcrypt.compare(password,this.password);
 }
-userSchemastatic.hashPassword=async function(password){
-    return await bycrpt.hash(password,10);
+userSchema.statics.hashPassword=async function(password){
+    return await bcrypt.hash(password,10);
 }
 const User=mongoose.model('user',userSchema);
 module.exports=User;

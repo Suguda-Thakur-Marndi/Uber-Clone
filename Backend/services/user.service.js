@@ -3,13 +3,13 @@ module.exports.createUser=async(firstname,lastname,email,password)=>{
    if(!firstname || !email || !password){
     throw new Error('Missing required fields: firstname, email, and password are required');
    }
-   const user=usermodel.create({
+   const user=await User.create({
     fullname:{
         firstname,
         lastname
     },
     email,
-    password:await usermodel.hashPassword(password)
+    password
    });
    return user; 
 };
