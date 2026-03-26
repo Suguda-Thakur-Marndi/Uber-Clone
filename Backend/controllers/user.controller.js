@@ -51,4 +51,9 @@ module.exports.loginUser=async(req,res)=>{
         token
     });
 }
+module.exports.getUserProfile=async(req,res)=>{
+   res.status(200).json({
+    user:req.user
+   })
+}
    

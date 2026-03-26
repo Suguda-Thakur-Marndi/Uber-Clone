@@ -11,5 +11,7 @@ const e = require('express');
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/users',userRoutes);
+const cookieParser=require('cookie-parser');
+app.use(cookieParser());
 
 module.exports=app;
