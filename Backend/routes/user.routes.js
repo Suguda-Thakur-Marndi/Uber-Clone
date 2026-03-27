@@ -31,6 +31,6 @@ router.get('/logout', authUser, async (req, res, next) => {
         next(error);
     }
 });
-
+router.post
 
 module.exports=router;
