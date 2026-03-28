@@ -1,12 +1,15 @@
-# User API Documentation
+# User API Documentation (Current)
 
 Base route prefix: `/users`
+
+Default local server URL: `http://localhost:3000`
 
 ## 1. Register User
 
 - Method: `POST`
 - Endpoint: `/users/register`
-- Description: Creates a new user account and returns a token.
+- Controller: `registerUser`
+- Description: Creates a new user account and returns a JWT token.
 
 ### Request Body
 
@@ -21,21 +24,12 @@ Base route prefix: `/users`
 }
 ```
 
-### Required Fields
+### Validation Rules
 
-- `fullname.firstname` (string, min 3 characters)
-- `email` (valid email, min 5 characters)
-- `password` (string, min 6 characters)
-
-### Optional Fields
-
-- `fullname.lastname` (string, min 3 characters if provided)
-
-### Status Codes
-
-- `201 Created`: User successfully registered
-- `400 Bad Request`: Validation failed
-- `500 Internal Server Error`: Server error
+- `fullname.firstname`: required, string, min 3 chars
+- `fullname.lastname`: optional, string, min 3 chars (if provided)
+- `email`: required, valid email, min 5 chars
+- `password`: required, string, min 6 chars
 
 ### Success Response (201)
 
@@ -47,7 +41,7 @@ Base route prefix: `/users`
 }
 ```
 
-### Error Response (400)
+### Validation Error Response (400)
 
 ```json
 {
@@ -61,10 +55,10 @@ Base route prefix: `/users`
 }
 ```
 
-### Example Request
+### Example
 
 ```bash
-curl -X POST http://localhost:4001/users/register \
+curl -X POST http://localhost:3000/users/register \
 	-H "Content-Type: application/json" \
 	-d '{
 		"fullname": {
@@ -80,7 +74,8 @@ curl -X POST http://localhost:4001/users/register \
 
 - Method: `POST`
 - Endpoint: `/users/login`
-- Description: Authenticates a user and returns a token.
+- Controller: `loginUser`
+- Description: Authenticates user and returns a JWT token.
 
 ### Request Body
 
@@ -91,17 +86,11 @@ curl -X POST http://localhost:4001/users/register \
 }
 ```
 
-### Required Fields
+### Current Behavior
 
-- `email` (valid email)
-- `password` (string, min 6 characters)
-
-### Status Codes
-
-- `200 OK`: Login successful
-- `400 Bad Request`: Validation failed
-- `401 Unauthorized`: Invalid email or password
-- `500 Internal Server Error`: Server error
+- Missing `email` or `password` returns 400.
+- Invalid credentials return 401.
+- Success returns token.
 
 ### Success Response (200)
 
@@ -113,6 +102,14 @@ curl -X POST http://localhost:4001/users/register \
 }
 ```
 
+### Error Response (400)
+
+```json
+{
+	"message": "Email and password are required"
+}
+```
+
 ### Error Response (401)
 
 ```json
@@ -121,10 +118,10 @@ curl -X POST http://localhost:4001/users/register \
 }
 ```
 
-### Example Request
+### Example
 
 ```bash
-curl -X POST http://localhost:4001/users/login \
+curl -X POST http://localhost:3000/users/login \
 	-H "Content-Type: application/json" \
 	-d '{
 		"email": "john@example.com",
@@ -136,20 +133,14 @@ curl -X POST http://localhost:4001/users/login \
 
 - Method: `GET`
 - Endpoint: `/users/profile`
-- Description: Retrieves the current authenticated user's profile information.
-- Authentication: Required (Bearer token)
+- Controller: `getUserProfile`
+- Authentication: required
 
-### Headers
+### Auth Header
 
-```
+```txt
 Authorization: Bearer <jwt_token>
 ```
-
-### Status Codes
-
-- `200 OK`: Profile retrieved successfully
-- `401 Unauthorized`: Token is invalid, expired, or blacklisted
-- `500 Internal Server Error`: Server error
 
 ### Success Response (200)
 
@@ -161,8 +152,7 @@ Authorization: Bearer <jwt_token>
 			"firstname": "John",
 			"lastname": "Doe"
 		},
-		"email": "john@example.com",
-		"createdAt": "2024-03-15T10:30:00.000Z"
+		"email": "john@example.com"
 	}
 }
 ```
@@ -175,10 +165,10 @@ Authorization: Bearer <jwt_token>
 }
 ```
 
-### Example Request
+### Example
 
 ```bash
-curl -X GET http://localhost:4001/users/profile \
+curl -X GET http://localhost:3000/users/profile \
 	-H "Authorization: Bearer <jwt_token>"
 ```
 
@@ -186,20 +176,8 @@ curl -X GET http://localhost:4001/users/profile \
 
 - Method: `GET`
 - Endpoint: `/users/logout`
-- Description: Logs out the current user and invalidates their token by adding it to the blacklist.
-- Authentication: Required (Bearer token)
-
-### Headers
-
-```
-Authorization: Bearer <jwt_token>
-```
-
-### Status Codes
-
-- `200 OK`: Logged out successfully
-- `401 Unauthorized`: Token is invalid or expired
-- `500 Internal Server Error`: Server error
+- Authentication: required
+- Description: Adds current token to blacklist and clears `token` cookie.
 
 ### Success Response (200)
 
@@ -209,59 +187,20 @@ Authorization: Bearer <jwt_token>
 }
 ```
 
-### Example Request
+### Example
 
 ```bash
-curl -X GET http://localhost:4001/users/logout \
+curl -X GET http://localhost:3000/users/logout \
 	-H "Authorization: Bearer <jwt_token>"
 ```
 
-## Token Blacklisting
+## Token Blacklist Notes
 
-### How It Works
+- Blacklisted tokens are stored in `BlacklistToken` collection.
+- `createdAt` has TTL of 86400 seconds (24 hours).
+- Auth middleware blocks blacklisted tokens with 401.
 
-Token blacklisting is a security mechanism that prevents users from using their JWT tokens after logout:
+## Current Code Notes
 
-1. **On Logout**: When a user logs out, their token is stored in the `BlacklistToken` collection in MongoDB.
-2. **On Protected Requests**: Before processing any protected request, the authentication middleware checks if the token exists in the blacklist.
-3. **Access Denial**: If the token is found in the blacklist, the request is rejected with a 401 Unauthorized response.
-4. **Automatic Cleanup**: Blacklisted tokens are automatically deleted from the database after 24 hours using MongoDB's TTL (Time To Live) feature.
-
-### Token Lifecycle
-
-```
-User Login
-    ↓
-JWT Token Generated
-    ↓
-User Makes Requests (Token Valid)
-    ↓
-User Logs Out
-    ↓
-Token Added to Blacklist
-    ↓
-Token Cannot Be Used
-    ↓
-After 24 Hours
-    ↓
-Token Automatically Removed from Blacklist
-```
-
-### Security Benefits
-
-- **Immediate Logout**: Users are immediately logged out upon logout request
-- **Session Revocation**: Old tokens cannot be reused after logout
-- **Automatic Cleanup**: Prevents database growth with automatic TTL expiration
-- **Stateless + Stateful**: Combines stateless JWT advantages with stateful logout control
-
-### Database Schema
-
-The `BlacklistToken` model stores:
-
-```javascript
-{
-	"_id": ObjectId,
-	"token": String (unique, required),
-	"createdAt": Date (expires after 86400 seconds / 24 hours)
-}
-```
+- There is a stray `router.post` line at the end of user routes file.
+- Remove that line to avoid route file syntax/runtime issues.

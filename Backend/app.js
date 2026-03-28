@@ -1,5 +1,6 @@
 const dotenv=require('dotenv');
 dotenv.config();
+const deiverRoute=require('./routes/driver.routes');
 const express=require('express');
 const app=express();
 const connectToDatabase=require('./db/db');
@@ -13,5 +14,7 @@ app.use(express.urlencoded({extended:true}));
 app.use('/users',userRoutes);
 const cookieParser=require('cookie-parser');
 app.use(cookieParser());
+
+app.use('/drivers',deiverRoute);
 
 module.exports=app;
