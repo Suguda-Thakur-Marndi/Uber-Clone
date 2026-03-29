@@ -1,17 +1,48 @@
-# User API Documentation (Current)
+# Uber Backend API Documentation
 
-Base route prefix: `/users`
+Base URL: http://localhost:3000
 
-Default local server URL: `http://localhost:3000`
+## Quick Start
 
-## 1. Register User
+1. Install dependencies.
 
-- Method: `POST`
-- Endpoint: `/users/register`
-- Controller: `registerUser`
-- Description: Creates a new user account and returns a JWT token.
+```bash
+cd Backend
+npm install
+```
 
-### Request Body
+2. Create a .env file inside Backend.
+
+```env
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+3. Run server.
+
+```bash
+node server.js
+```
+
+## Authentication
+
+Protected routes require a JWT token.
+
+Use this header in Postman:
+
+```txt
+Authorization: Bearer <token>
+```
+
+## User Routes
+
+### 1. Register User
+
+- Method: POST
+- Endpoint: /users/register
+
+Request body:
 
 ```json
 {
@@ -24,24 +55,203 @@ Default local server URL: `http://localhost:3000`
 }
 ```
 
-### Validation Rules
+Validation:
 
-- `fullname.firstname`: required, string, min 3 chars
-- `fullname.lastname`: optional, string, min 3 chars (if provided)
-- `email`: required, valid email, min 5 chars
-- `password`: required, string, min 6 chars
+- fullname.firstname: required, string, min 3
+- fullname.lastname: optional, string, min 3
+- email: required, valid email, min 5
+- password: required, string, min 6
 
-### Success Response (201)
+Success response:
 
 ```json
 {
 	"message": "User registered successfully",
-	"userId": "65f0c0a5f7f9d4d0f4a12345",
+	"userId": "<user_id>",
 	"token": "<jwt_token>"
 }
 ```
 
-### Validation Error Response (400)
+### 2. Login User
+
+- Method: POST
+- Endpoint: /users/login
+
+Request body:
+
+```json
+{
+	"email": "john@example.com",
+	"password": "secret123"
+}
+```
+
+Success response:
+
+```json
+{
+	"message": "Login successful",
+	"userId": "<user_id>",
+	"token": "<jwt_token>"
+}
+```
+
+### 3. Get User Profile
+
+- Method: GET
+- Endpoint: /users/profile
+- Auth required: Yes
+
+Success response:
+
+```json
+{
+	"user": {
+		"_id": "<user_id>",
+		"fullname": {
+			"firstname": "John",
+			"lastname": "Doe"
+		},
+		"email": "john@example.com"
+	}
+}
+```
+
+### 4. Logout User
+
+- Method: GET
+- Endpoint: /users/logout
+- Auth required: Yes
+
+Success response:
+
+```json
+{
+	"message": "Logged out successfully"
+}
+```
+
+## Driver Routes
+
+### 5. Register Driver
+
+- Method: POST
+- Endpoint: /drivers/register
+
+Request body:
+
+```json
+{
+	"fullname": {
+		"firstname": "Alex",
+		"lastname": "Driver"
+	},
+	"email": "alex@example.com",
+	"password": "secret123",
+	"vehicle": {
+		"colour": "white",
+		"capacity": 4,
+		"vehicleType": "sedan"
+	}
+}
+```
+
+Validation:
+
+- fullname.firstname: required, string, min 3
+- fullname.lastname: optional, string, min 3
+- email: required, valid email, min 5
+- password: required, string, min 6
+- vehicle.colour: required, string, min 3
+- vehicle.capacity: required, integer, min 1
+- vehicle.vehicleType: required, one of sedan, suv, hatchback, van, truck
+
+Success response:
+
+```json
+{
+	"message": "Driver registered successfully",
+	"driverId": "<driver_id>",
+	"token": "<jwt_token>"
+}
+```
+
+### 6. Login Driver
+
+- Method: POST
+- Endpoint: /drivers/login
+
+Request body:
+
+```json
+{
+	"email": "alex@example.com",
+	"password": "secret123"
+}
+```
+
+Success response:
+
+```json
+{
+	"message": "Driver logged in successfully",
+	"driverId": "<driver_id>",
+	"token": "<jwt_token>"
+}
+```
+
+### 7. Get Driver Profile
+
+- Method: GET
+- Endpoint: /drivers/profile
+- Auth required: Yes
+
+Success response:
+
+```json
+{
+	"driver": {
+		"_id": "<driver_id>",
+		"fullname": {
+			"firstname": "Alex",
+			"lastname": "Driver"
+		},
+		"email": "alex@example.com",
+		"vehicle": {
+			"colour": "white",
+			"capacity": 4,
+			"vehicleType": "sedan"
+		}
+	}
+}
+```
+
+### 8. Logout Driver
+
+- Method: GET
+- Endpoint: /drivers/logout
+- Auth required: Yes
+
+Success response:
+
+```json
+{
+	"message": "Driver logged out successfully"
+}
+```
+
+## Postman Test Order
+
+1. Call POST /users/register.
+2. Call POST /users/login and copy token.
+3. Set token in Authorization header.
+4. Call GET /users/profile.
+5. Call GET /users/logout.
+6. Repeat same flow for /drivers endpoints.
+
+## Common Error Responses
+
+Validation error:
 
 ```json
 {
@@ -55,152 +265,10 @@ Default local server URL: `http://localhost:3000`
 }
 ```
 
-### Example
-
-```bash
-curl -X POST http://localhost:3000/users/register \
-	-H "Content-Type: application/json" \
-	-d '{
-		"fullname": {
-			"firstname": "John",
-			"lastname": "Doe"
-		},
-		"email": "john@example.com",
-		"password": "secret123"
-	}'
-```
-
-## 2. Login User
-
-- Method: `POST`
-- Endpoint: `/users/login`
-- Controller: `loginUser`
-- Description: Authenticates user and returns a JWT token.
-
-### Request Body
-
-```json
-{
-	"email": "john@example.com",
-	"password": "secret123"
-}
-```
-
-### Current Behavior
-
-- Missing `email` or `password` returns 400.
-- Invalid credentials return 401.
-- Success returns token.
-
-### Success Response (200)
-
-```json
-{
-	"message": "Login successful",
-	"userId": "65f0c0a5f7f9d4d0f4a12345",
-	"token": "<jwt_token>"
-}
-```
-
-### Error Response (400)
-
-```json
-{
-	"message": "Email and password are required"
-}
-```
-
-### Error Response (401)
-
-```json
-{
-	"message": "Invalid email or password"
-}
-```
-
-### Example
-
-```bash
-curl -X POST http://localhost:3000/users/login \
-	-H "Content-Type: application/json" \
-	-d '{
-		"email": "john@example.com",
-		"password": "secret123"
-	}'
-```
-
-## 3. Get User Profile
-
-- Method: `GET`
-- Endpoint: `/users/profile`
-- Controller: `getUserProfile`
-- Authentication: required
-
-### Auth Header
-
-```txt
-Authorization: Bearer <jwt_token>
-```
-
-### Success Response (200)
-
-```json
-{
-	"user": {
-		"_id": "65f0c0a5f7f9d4d0f4a12345",
-		"fullname": {
-			"firstname": "John",
-			"lastname": "Doe"
-		},
-		"email": "john@example.com"
-	}
-}
-```
-
-### Error Response (401)
+Unauthorized error:
 
 ```json
 {
 	"message": "Unauthorized"
 }
 ```
-
-### Example
-
-```bash
-curl -X GET http://localhost:3000/users/profile \
-	-H "Authorization: Bearer <jwt_token>"
-```
-
-## 4. Logout User
-
-- Method: `GET`
-- Endpoint: `/users/logout`
-- Authentication: required
-- Description: Adds current token to blacklist and clears `token` cookie.
-
-### Success Response (200)
-
-```json
-{
-	"message": "Logged out successfully"
-}
-```
-
-### Example
-
-```bash
-curl -X GET http://localhost:3000/users/logout \
-	-H "Authorization: Bearer <jwt_token>"
-```
-
-## Token Blacklist Notes
-
-- Blacklisted tokens are stored in `BlacklistToken` collection.
-- `createdAt` has TTL of 86400 seconds (24 hours).
-- Auth middleware blocks blacklisted tokens with 401.
-
-## Current Code Notes
-
-- There is a stray `router.post` line at the end of user routes file.
-- Remove that line to avoid route file syntax/runtime issues.

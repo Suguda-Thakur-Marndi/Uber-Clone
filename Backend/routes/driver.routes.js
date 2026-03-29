@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { body, validationResult } = require('express-validator');
-const driverController = require('../controllers/user.controller');
+const { body } = require('express-validator');
+const driverController = require('../controllers/driver.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 router.post('/register', [
     body('fullname.firstname').isString().isLength({ min: 3 }).withMessage('first name must be at least 3 characters'),
@@ -18,5 +19,8 @@ router.post('/login', [
     body('email').isEmail().withMessage('invalid email format').isLength({ min: 5 }).withMessage('email must be at least 5 characters'),
     body('password').isString().isLength({ min: 6 }).withMessage('password must be at least 6 characters')
 ], driverController.loginDriver);
+
+router.get('/profile', authMiddleware.userModel, driverController.getDriverProfile);
+router.get('/logout', authMiddleware.userModel,driverController.logoutDriver);
 
 module.exports = router;

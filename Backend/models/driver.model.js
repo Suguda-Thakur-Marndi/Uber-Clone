@@ -67,7 +67,7 @@ driverSchema.methods.generateAuthToken=function(){
 driverSchema.methods.comparePassword=async function(password){
     return await bcrypt.compare(password,this.password);
 }
-driverSchema.methods.hashPassword=async function(password){
+driverSchema.statics.hashPassword=async function(password){
     return await bcrypt.hash(password,10);
 }
 const driverModel=mongoose.model('Driver',driverSchema);

@@ -14,7 +14,7 @@ module.exports.createDriver = async (firstname, lastname, email, password, color
         colour: color,
         capacity: capacity,
         vehicleType: vehicleType
-    }   
+    }
    });
-   return driver; 
+   return driver;
 };

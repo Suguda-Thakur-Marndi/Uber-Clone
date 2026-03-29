@@ -16,8 +16,8 @@ router.post('/login',[
     body('password').isString().isLength({min:6}).withMessage('password must be at least 6 characters')
 ],
 userController.loginUser)
-router.get('/profile',authUser,userController.getUserProfile);
-router.get('/logout', authUser, async (req, res, next) => {
+router.get('/profile', authUser.userModel, userController.getUserProfile);
+router.get('/logout', authUser.userModel, async (req, res, next) => {
     try {
         const token = req.cookies?.token || req.headers.authorization?.split(' ')[1];
         
@@ -31,6 +31,5 @@ router.get('/logout', authUser, async (req, res, next) => {
         next(error);
     }
 });
-router.post
 
 module.exports=router;
