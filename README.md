@@ -1,17 +1,39 @@
-# Uber Backend API Documentation
+# UBER Ride App
 
-Base URL: http://localhost:3000
+Full-stack MERN-style project with:
+
+- Backend API (Node.js, Express, MongoDB)
+- Frontend client (React + Vite)
+
+## Project Structure
+
+```text
+UBER/
+	Backend/
+	Frontend/
+```
+
+## Tech Stack
+
+- Backend: Express, Mongoose, JWT, bcrypt, cookie-parser, cors
+- Frontend: React, React Router, Vite, Tailwind CSS
+
+## Prerequisites
+
+- Node.js 18+
+- npm 9+
+- MongoDB (local or cloud)
 
 ## Quick Start
 
-1. Install dependencies.
+1. Install backend dependencies.
 
 ```bash
 cd Backend
 npm install
 ```
 
-2. Create a .env file inside Backend.
+2. Create `Backend/.env`.
 
 ```env
 PORT=3000
@@ -19,28 +41,68 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
 
-3. Run server.
+3. Install frontend dependencies.
 
 ```bash
-node server.js
+cd ../Frontend
+npm install
 ```
+
+4. Start backend (Terminal 1).
+
+```bash
+cd Backend
+npm run dev
+```
+
+5. Start frontend (Terminal 2).
+
+```bash
+cd Frontend
+npm run dev
+```
+
+Default URLs:
+
+- Backend API: http://localhost:3000
+- Frontend App: http://localhost:5173
+
+## Backend Scripts
+
+Inside `Backend`:
+
+- `npm start` -> run server with Node
+- `npm run dev` -> run server with nodemon
+
+## Frontend Scripts
+
+Inside `Frontend`:
+
+- `npm run dev` -> start Vite dev server
+- `npm run build` -> production build
+- `npm run preview` -> preview production build
+- `npm run lint` -> run ESLint
 
 ## Authentication
 
 Protected routes require a JWT token.
 
-Use this header in Postman:
+Use this header:
 
-```txt
+```text
 Authorization: Bearer <token>
 ```
 
-## User Routes
+## API Routes
 
-### 1. Register User
+Base URL: `http://localhost:3000`
+
+### User Routes
+
+1. Register User
 
 - Method: POST
-- Endpoint: /users/register
+- Endpoint: `/users/register`
 
 Request body:
 
@@ -57,10 +119,10 @@ Request body:
 
 Validation:
 
-- fullname.firstname: required, string, min 3
-- fullname.lastname: optional, string, min 3
-- email: required, valid email, min 5
-- password: required, string, min 6
+- `fullname.firstname`: required, string, min 3
+- `fullname.lastname`: optional, string, min 3
+- `email`: required, valid email, min 5
+- `password`: required, string, min 6
 
 Success response:
 
@@ -72,10 +134,10 @@ Success response:
 }
 ```
 
-### 2. Login User
+2. Login User
 
 - Method: POST
-- Endpoint: /users/login
+- Endpoint: `/users/login`
 
 Request body:
 
@@ -96,10 +158,10 @@ Success response:
 }
 ```
 
-### 3. Get User Profile
+3. Get User Profile
 
 - Method: GET
-- Endpoint: /users/profile
+- Endpoint: `/users/profile`
 - Auth required: Yes
 
 Success response:
@@ -117,10 +179,10 @@ Success response:
 }
 ```
 
-### 4. Logout User
+4. Logout User
 
 - Method: GET
-- Endpoint: /users/logout
+- Endpoint: `/users/logout`
 - Auth required: Yes
 
 Success response:
@@ -131,12 +193,12 @@ Success response:
 }
 ```
 
-## Driver Routes
+### Driver Routes
 
-### 5. Register Driver
+1. Register Driver
 
 - Method: POST
-- Endpoint: /drivers/register
+- Endpoint: `/drivers/register`
 
 Request body:
 
@@ -158,13 +220,13 @@ Request body:
 
 Validation:
 
-- fullname.firstname: required, string, min 3
-- fullname.lastname: optional, string, min 3
-- email: required, valid email, min 5
-- password: required, string, min 6
-- vehicle.colour: required, string, min 3
-- vehicle.capacity: required, integer, min 1
-- vehicle.vehicleType: required, one of sedan, suv, hatchback, van, truck
+- `fullname.firstname`: required, string, min 3
+- `fullname.lastname`: optional, string, min 3
+- `email`: required, valid email, min 5
+- `password`: required, string, min 6
+- `vehicle.colour`: required, string, min 3
+- `vehicle.capacity`: required, integer, min 1
+- `vehicle.vehicleType`: required, one of sedan, suv, hatchback, van, truck
 
 Success response:
 
@@ -176,10 +238,10 @@ Success response:
 }
 ```
 
-### 6. Login Driver
+2. Login Driver
 
 - Method: POST
-- Endpoint: /drivers/login
+- Endpoint: `/drivers/login`
 
 Request body:
 
@@ -200,10 +262,10 @@ Success response:
 }
 ```
 
-### 7. Get Driver Profile
+3. Get Driver Profile
 
 - Method: GET
-- Endpoint: /drivers/profile
+- Endpoint: `/drivers/profile`
 - Auth required: Yes
 
 Success response:
@@ -226,10 +288,10 @@ Success response:
 }
 ```
 
-### 8. Logout Driver
+4. Logout Driver
 
 - Method: GET
-- Endpoint: /drivers/logout
+- Endpoint: `/drivers/logout`
 - Auth required: Yes
 
 Success response:
@@ -240,14 +302,14 @@ Success response:
 }
 ```
 
-## Postman Test Order
+## Suggested Postman Test Order
 
-1. Call POST /users/register.
-2. Call POST /users/login and copy token.
-3. Set token in Authorization header.
-4. Call GET /users/profile.
-5. Call GET /users/logout.
-6. Repeat same flow for /drivers endpoints.
+1. Call `POST /users/register`
+2. Call `POST /users/login` and copy token
+3. Set token in Authorization header
+4. Call `GET /users/profile`
+5. Call `GET /users/logout`
+6. Repeat for `/drivers/*` endpoints
 
 ## Common Error Responses
 
