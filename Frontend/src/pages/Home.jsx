@@ -2,6 +2,7 @@ import uberBackground from '/src/assets/b.png'
 
 const Home = () => {
     return (
+        
         <div className="h-screen pt-8 flex justify-between flex-col w-full bg-red-400" style={{ backgroundImage: `url(${uberBackground})`, backgroundSize: "cover" }}>
             <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
             <div className='bg-white flex flex-col items-center justify-center pb-10 gap-4'>
