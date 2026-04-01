@@ -5,7 +5,7 @@ const UserLogin = () => {
       <div className="p-7">
         <form>
           <div className="flex justify-center pb-8">
-            <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
+             <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
           </div>
           <h3 className="mb-2 text-xl">
             What's your email

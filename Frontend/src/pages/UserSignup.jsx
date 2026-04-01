@@ -25,7 +25,7 @@ const UserSignup = () => {
           </button>
         
           <p className="text-center">
-            Do You have an account? <Link to="/signup" className="bg-black text-white px-4 py-2 rounded">Login</Link>
+            Do You have an account? <Link to="/login" className="bg-black text-white px-4 py-2 rounded">Login</Link>
           </p>
         </form>
       </div>
