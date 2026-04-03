@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import UserSignup from './pages/UserSignup'
-import UserLogin from './pages/userLogin'
-import Driversign from './pages/Driversign'
-import Driversigup from './pages/Driversigup'
+import UserLogin from './pages/UserLogin'
+import DriverSign from './pages/Driversign'
+import DriverSignup from './pages/Driversigup'
 
 const App = () => {
   return (
@@ -12,8 +12,8 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<UserSignup/>} />
         <Route path='/login' element={<UserLogin/>} />
-        <Route path='/Driversign' element={<Driversign/>} />
-        <Route path='/Driversighup' element={<Driversigup/>} />
+        <Route path='/driver-sign' element={<DriverSign/>} />
+        <Route path='/driver-signup' element={<DriverSignup/>} />
         
       </Routes>
     </div>
