@@ -1,26 +1,35 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { response } from '../../../Backend/app'
 
 const UserSignup = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userData, setuserData] = useState({})
+  const [userData, setUserData] = useState({})
+  const navigate = useNavigate()
 
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault()
 
-    const userData = {
+    const newUser = {
       fullName: {
-      firstName,
-      lastName,
+        firstName,
+        lastName,
       },
       email,
       password,
     }
+    await axios.post(`${import.meta.env.VITE_BASE}/users/register`, newUser)
+    if(response.status==201){
+    
+    }
 
-    console.log(userData)
+    setUserData(newUser)
+    console.log(newUser)
+    navigate('/login')
 
     setFirstName('')
     setLastName('')
