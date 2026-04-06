@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { response } from '../../../Backend/app'
 
 const UserSignup = () => {
   const [firstName, setFirstName] = useState('')
@@ -15,21 +14,23 @@ const UserSignup = () => {
     e.preventDefault()
 
     const newUser = {
-      fullName: {
-        firstName,
-        lastName,
+      fullname: {
+        firstname: firstName,
+        lastname: lastName,
       },
       email,
       password,
     }
-    await axios.post(`${import.meta.env.VITE_BASE}/users/register`, newUser)
-    if(response.status==201){
-    
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE}/users/register`, newUser)
+      if(response.status === 201){
+        setUserData(newUser)
+        console.log(newUser)
+        navigate('/login')
+      }
+    } catch (error) {
+      console.error('Registration error:', error.response?.data || error.message)
     }
-
-    setUserData(newUser)
-    console.log(newUser)
-    navigate('/login')
 
     setFirstName('')
     setLastName('')

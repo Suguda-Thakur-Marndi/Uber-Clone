@@ -1,4 +1,4 @@
-import uberBackground from '/src/assets/b.png'
+import uberBackground from '../assets/b.png'
 import { Link } from 'react-router-dom'
 
 const Start = () => {

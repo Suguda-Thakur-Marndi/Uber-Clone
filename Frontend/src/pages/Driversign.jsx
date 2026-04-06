@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const DriverSign = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [Driver, setDriver] = useState('{}')
+  const [Driver, setDriver] = useState({})
 
   const submitHandle = (e) => {
     e.preventDefault()
