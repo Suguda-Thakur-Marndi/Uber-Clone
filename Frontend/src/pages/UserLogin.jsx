@@ -1,10 +1,12 @@
-import { useState } from 'react'
- import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { UserDataContext } from '../assets/context/Usercontext'
 const UserLogin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const { setUser } = useContext(UserDataContext)
 
   const submitHandle=async(e)=>{
     e.preventDefault()
@@ -15,6 +17,7 @@ const UserLogin = () => {
       })
       if(response.status === 200){
         localStorage.setItem('token', response.data.token)
+        setUser(response.data.user)
         navigate('/Home')
       }
     } catch (error) {

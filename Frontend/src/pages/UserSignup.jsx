@@ -8,11 +8,10 @@ const UserSignup = () => {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userData, setUserData] = useState({})
   const navigate = useNavigate()
-  const {user, setUser} = useContext(UserDataContext)
+  const { setUser } = useContext(UserDataContext)
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
 
     const newUser = {
@@ -23,11 +22,17 @@ const UserSignup = () => {
       email,
       password,
     }
+
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
-      if(response.status === 201){
-        const data=response.data
-        setUser(data)
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/users/register`,
+        newUser
+      )
+
+      if (response.status === 201) {
+        const data = response.data
+        localStorage.setItem('token', data.token)
+        setUser(data.user)
         navigate('/Home')
       }
     } catch (error) {
