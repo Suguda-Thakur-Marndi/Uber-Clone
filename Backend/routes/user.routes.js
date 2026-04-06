@@ -3,7 +3,7 @@ const router=express.Router();
 const { body } = require('express-validator');
 const userController = require('../controllers/user.controller');
 const authUser=require('../middlewares/auth.middleware');
-const balcklistTokenModel=require('../models/blacklist.token.model');
+const blacklistTokenModel=require('../models/blacklist.token.model');
 router.post('/register',[
     body('fullname.firstname').isString().isLength({min:3}).withMessage('first name must be at least 3 characters'),
     body('fullname.lastname').optional().isString().isLength({min:3}).withMessage('last name must be at least 3 characters'),
@@ -22,7 +22,7 @@ router.get('/logout', authUser.userModel, async (req, res, next) => {
         const token = req.cookies?.token || req.headers.authorization?.split(' ')[1];
         
         if (token) {
-            await balcklistTokenModel.create({ token });
+            await blacklistTokenModel.create({ token });
             res.clearCookie('token');
         }
         

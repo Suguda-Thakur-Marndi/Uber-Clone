@@ -21,7 +21,11 @@ module.exports.registerUser=async(req,res)=>{
     const token=user.generateAuthToken();
     res.status(201).json({
         message:'User registered successfully',
-        userId:user._id,
+        user:{
+            _id:user._id,
+            email:user.email,
+            fullname:user.fullname
+        },
         token
     });
 }
@@ -45,9 +49,13 @@ module.exports.loginUser=async(req,res)=>{
         });
     }
     const token=user.generateAuthToken();
-    res.json({
+    res.status(200).json({
         message:'Login successful',
-        userId:user._id,
+        user:{
+            _id:user._id,
+            email:user.email,
+            fullname:user.fullname
+        },
         token
     });
 }
