@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { DriverDataContext } from '../assets/context/Drivercontext'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const DriverSignup = () => {
+  const navigate = useNavigate()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -9,11 +13,12 @@ const DriverSignup = () => {
   const [vehicleColour, setVehicleColour] = useState('')
   const [vehicleCapacity, setVehicleCapacity] = useState('')
   const [vehicleType, setVehicleType] = useState('sedan')
+  const { setDriver } = useContext(DriverDataContext)
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
 
-    const userData = {
+    const driverData = {
       fullname: {
         firstname: firstName,
         lastname: lastName,
@@ -27,12 +32,34 @@ const DriverSignup = () => {
       }
     }
 
-    console.log(userData)
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/drivers/register`,
+        driverData
+      )
 
-    setFirstName('')
-    setLastName('')
-    setEmail('')
-    setPassword('')
+      if (response.status === 201) {
+        const data = response.data
+        setDriver({
+          _id: data.driverId,
+          fullname: driverData.fullname,
+          email: driverData.email,
+          vehicle: driverData.vehicle,
+        })
+        localStorage.setItem('token', data.token)
+        navigate('/Driverhome')
+
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+        setPassword('')
+        setVehicleColour('')
+        setVehicleCapacity('')
+        setVehicleType('sedan')
+      }
+    } catch (error) {
+      console.error('Driver signup failed:', error?.response?.data || error.message)
+    }
   }
 
   return (
