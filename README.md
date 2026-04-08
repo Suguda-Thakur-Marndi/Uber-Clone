@@ -1,6 +1,6 @@
 # UBER Ride App
 
-Full-stack MERN-style project with:
+Full-stack ride-booking demo app with:
 
 - Backend API (Node.js, Express, MongoDB)
 - Frontend client (React + Vite)
@@ -37,9 +37,11 @@ npm install
 
 ```env
 PORT=3000
-MONGO_URI=your_mongodb_connection_string
+MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
+
+You can also use `MONGO_URI` (both are supported by the backend).
 
 3. Install frontend dependencies.
 
@@ -51,14 +53,14 @@ npm install
 4. Start backend (Terminal 1).
 
 ```bash
-cd Backend
+cd UBER/Backend
 npm run dev
 ```
 
 5. Start frontend (Terminal 2).
 
 ```bash
-cd Frontend
+cd UBER/Frontend
 npm run dev
 ```
 
