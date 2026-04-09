@@ -50,6 +50,12 @@ cd ../Frontend
 npm install
 ```
 
+Create `Frontend/.env`:
+
+```env
+VITE_BASE_URL=http://localhost:3000
+```
+
 4. Start backend (Terminal 1).
 
 ```bash
@@ -88,6 +94,16 @@ Inside `Frontend`:
 ## Authentication
 
 Protected routes require a JWT token.
+
+JWT payload includes both `_id` and `role`:
+
+- User token: `role: "user"`
+- Driver token: `role: "driver"`
+
+Backend middleware validates role-specific access:
+
+- User endpoints use user auth middleware.
+- Driver endpoints use driver auth middleware.
 
 Use this header:
 
@@ -131,7 +147,14 @@ Success response:
 ```json
 {
 	"message": "User registered successfully",
-	"userId": "<user_id>",
+	"user": {
+		"_id": "<user_id>",
+		"email": "john@example.com",
+		"fullname": {
+			"firstname": "John",
+			"lastname": "Doe"
+		}
+	},
 	"token": "<jwt_token>"
 }
 ```
@@ -155,7 +178,14 @@ Success response:
 ```json
 {
 	"message": "Login successful",
-	"userId": "<user_id>",
+	"user": {
+		"_id": "<user_id>",
+		"email": "john@example.com",
+		"fullname": {
+			"firstname": "John",
+			"lastname": "Doe"
+		}
+	},
 	"token": "<jwt_token>"
 }
 ```
@@ -312,6 +342,12 @@ Success response:
 4. Call `GET /users/profile`
 5. Call `GET /users/logout`
 6. Repeat for `/drivers/*` endpoints
+
+## Frontend Route Notes
+
+- `/Home` is protected by `UserProtectedWrapper` and redirects to `/login` when token is missing.
+- `/Driverhome` is protected by `DriverProtected`.
+- `DriverProtected` validates token by calling `GET /drivers/profile` before rendering children.
 
 ## Common Error Responses
 

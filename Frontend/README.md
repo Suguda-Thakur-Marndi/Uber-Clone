@@ -27,7 +27,7 @@ npm install
 2. Create `.env` in the `Frontend` folder:
 
 ```env
-VITE_BASE=http://localhost:3000
+VITE_BASE_URL=http://localhost:3000
 ```
 
 3. Start development server:
@@ -52,7 +52,13 @@ App runs on `http://localhost:5173` by default.
 - `/login` - User login
 - `/driver-sign` - Driver login
 - `/driver-signup` - Driver signup
-- `/Home` - Home page
+- `/Home` - User home (protected)
+- `/Driverhome` - Driver home (protected)
+
+Protected route behavior:
+
+- `UserProtectedWrapper` redirects unauthenticated users to `/login`.
+- `DriverProtected` verifies token by calling `GET /drivers/profile` and redirects to `/driver-sign` if invalid.
 
 ## Project Structure
 
@@ -74,6 +80,6 @@ Frontend/
 
 ## Backend Integration
 
-- API base URL is read from `import.meta.env.VITE_BASE`.
+- API base URL is read from `import.meta.env.VITE_BASE_URL`.
 - Current user signup flow posts to `/users/register`.
 - Keep backend running before testing frontend auth flows.
