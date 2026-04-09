@@ -40,7 +40,7 @@ const DriverSignup = () => {
 
       if (response.status === 201) {
         const data = response.data
-        setDriver({
+        setDriver({            
           _id: data.driverId,
           fullname: driverData.fullname,
           email: driverData.email,
