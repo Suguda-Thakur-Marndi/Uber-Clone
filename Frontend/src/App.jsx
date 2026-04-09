@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import UserLogout from './pages/UserLogout'
 import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import DriverHome from './pages/Driverhome'
+import DriverProtected from './pages/DriverProtected'
 
 const App = () => {
   return (
@@ -27,7 +28,14 @@ const App = () => {
           }
         />
         <Route path='/logout' element={<UserLogout />} />
-        <Route path='/Driverhome' element={<DriverHome />} />
+        <Route
+          path='/Driverhome'
+          element={
+            <DriverProtected>
+              <DriverHome />
+            </DriverProtected>
+          }
+        />
       </Routes>
     </div>
   )
