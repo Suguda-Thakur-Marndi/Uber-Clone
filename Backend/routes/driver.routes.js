@@ -20,7 +20,7 @@ router.post('/login', [
     body('password').isString().isLength({ min: 6 }).withMessage('password must be at least 6 characters')
 ], driverController.loginDriver);
 
-router.get('/profile', authMiddleware.userModel, driverController.getDriverProfile);
-router.get('/logout', authMiddleware.userModel,driverController.logoutDriver);
+router.get('/profile', authMiddleware.driverModel, driverController.getDriverProfile);
+router.get('/logout', authMiddleware.driverModel,driverController.logoutDriver);
 
 module.exports = router;

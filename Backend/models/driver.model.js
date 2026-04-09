@@ -61,7 +61,7 @@ const driverSchema = new mongoose.Schema({
     }
 });
 driverSchema.methods.generateAuthToken=function(){
-    const token=jwt.sign({_id:this._id},process.env.JWT_SECRET,{expiresIn:'24h'});
+    const token=jwt.sign({_id:this._id,role:'driver'},process.env.JWT_SECRET,{expiresIn:'24h'});
     return token;
 }
 driverSchema.methods.comparePassword=async function(password){
