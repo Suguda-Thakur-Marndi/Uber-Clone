@@ -6,7 +6,7 @@ import DriverSign from './pages/DriverSign'
 import DriverSignup from './pages/DriverSignup'
 import Home from './pages/Home'
 import UserLogout from './pages/UserLogout'
-import UserProtectedWrapper from './pages/userProtectedWrapper'
+import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import DriverHome from './pages/Driverhome'
 
 const App = () => {
