@@ -24,7 +24,9 @@ const Home = () => {
 
           }}>
             <div className="absolute left-7 py-3.5 top-0 h-full rounded-full w-1 flex-col bg-black"></div>
-            <input 
+            <input onClick={()=>{
+              setpanel(true)
+            }}
 
               className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
               type="text" 
@@ -33,7 +35,10 @@ const Home = () => {
                 setpickup(e.target.value)
               }}
             />
-            <input 
+            <input
+            onClick={()=>{
+              setpanel(true)
+            }} 
               className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
               type="text" 
               placeholder="🎯 Enter your destination"
