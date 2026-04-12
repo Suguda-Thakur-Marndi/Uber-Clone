@@ -3,7 +3,7 @@ import { useState } from "react"
 const Home = () => {
   const [pickup, setpickup] = useState('')
   const [destination, setdestination] = useState('')
-  const [panel, setpanel] = useState('')
+  const [panel, setpanel] = useState(false)
   const Submithandel=(e)=>{
     e.preventDefault();
 
