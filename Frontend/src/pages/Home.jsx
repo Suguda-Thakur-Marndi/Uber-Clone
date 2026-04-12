@@ -1,13 +1,25 @@
-import React from "react"
-import { useState } from "react"
+import { useState, useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 const Home = () => {
-  const [pickup, setpickup] = useState('')
-  const [destination, setdestination] = useState('')
-  const [panel, setpanel] = useState(false)
-  const Submithandel=(e)=>{
-    e.preventDefault();
+  const [pickup, setPickup] = useState('')
+  const [destination, setDestination] = useState('')
+  const [panel, setPanel] = useState(false)
+  const panelRef = useRef(null)
+  
+  useGSAP(() => {
+    if(panel){
+      gsap.to(panelRef.current, { height:'70%' })
+    } else {
+      gsap.to(panelRef.current, { height:'30%' })
+    }
+  }, [panel])
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setPanel(!panel)
   }
+
   return (
     <div className="h-screen relative overflow-hidden">
       <div className="fixed top-0 left-0 right-0 z-10 bg-white shadow-sm">
@@ -19,43 +31,41 @@ const Home = () => {
           <h4 className="text-3xl font-bold mb-6 text-gray-900">
             Find Trip
           </h4>
-          <form className="space-y-4 relative" onSubmit={(e)=>{
-            Submithandel(e)
-
-          }}>
+          <form className="space-y-4 relative" onSubmit={handleSubmit}>
             <div className="absolute left-7 py-3.5 top-0 h-full rounded-full w-1 flex-col bg-black"></div>
-            <input onClick={()=>{
-              setpanel(true)
-            }}
-
+            <input 
+              onClick={()=>{
+                setPanel(true)
+              }}
               className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
               type="text" 
               placeholder="📍 Add Pickup location"
-              name={pickup}onChange={(e)=>{
-                setpickup(e.target.value)
+              value={pickup}
+              onChange={(e)=>{
+                setPickup(e.target.value)
               }}
             />
             <input
-            onClick={()=>{
-              setpanel(true)
-            }} 
+              onClick={()=>{
+                setPanel(true)
+              }} 
               className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
               type="text" 
               placeholder="🎯 Enter your destination"
-              name={destination}
-               onChange={(e)=>{
-                setdestination(e.target.value)
-
+              value={destination}
+              onChange={(e)=>{
+                setDestination(e.target.value)
               }}
             />
           </form>
         </div>
-        <div className="bg-red-500 h-[70%] p-5 w-full hidden">
+        <div ref={panelRef} className="bg-red-500 h-[70%] p-5 w-full">
 
         </div>
       </div>
     </div>
   )
 }
+  
 
 export default Home
