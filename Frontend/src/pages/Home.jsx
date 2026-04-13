@@ -34,7 +34,7 @@ const Home = () => {
           <h5 onClick={()=>
             setPanel(false)
           } >
-          <i class="ri-arrow-down-line"></i>
+          <i className="ri-arrow-down-line"></i>
           </h5>
           <h4 className="text-3xl font-bold mb-6 text-gray-900">
             Find Trip
