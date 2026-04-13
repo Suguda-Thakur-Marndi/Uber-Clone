@@ -6,13 +6,16 @@ const Home = () => {
   const [pickup, setPickup] = useState('')
   const [destination, setDestination] = useState('')
   const [panel, setPanel] = useState(false)
+  const sheetRef = useRef(null)
   const panelRef = useRef(null)
   
   useGSAP(() => {
     if(panel){
-      gsap.to(panelRef.current, { height:'70%' })
+      gsap.to(sheetRef.current, { top: 0, height: '100vh', duration: 0.35 })
+      gsap.to(panelRef.current, { height:'100%', duration: 0.35 })
     } else {
-      gsap.to(panelRef.current, { height:'0%' })
+      gsap.to(sheetRef.current, { top: '4rem', height: 'calc(100vh - 4rem)', duration: 0.35 })
+      gsap.to(panelRef.current, { height:'0%', duration: 0.35 })
     }
   }, [panel])
 
@@ -27,10 +30,9 @@ const Home = () => {
         <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
       </div>
       <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
-      <div className=" flex flex-col justify-end absolute h-screen top-0 w-full px-0  rounded-t-3xl shadow-lg">
-        <div className="h-[30%] p-5 w-full bg-white relative">
-          <h5 className="absolute top-3 left-3 text-2xl text-black">
-          <i className="ri-arrow-down-line"></i></h5>
+      <div ref={sheetRef} className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
+        <div className="h-[30%] p-5 w-full  bg-white">
+          
           <h4 className="text-3xl font-bold mb-6 text-gray-900">
             Find Trip
           </h4>
@@ -62,7 +64,7 @@ const Home = () => {
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-red-500 h-[70%] p-5 w-full">
+        <div ref={panelRef} className="bg-white h-0 p-5 w-full overflow-auto">
 
         </div>
       </div>
