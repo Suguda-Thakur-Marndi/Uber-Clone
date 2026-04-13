@@ -8,6 +8,7 @@ const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
   
+  
   useGSAP(() => {
     if(panel){
       gsap.to(panelRef.current, { height:'70%' })
@@ -28,8 +29,13 @@ const Home = () => {
       </div>
       <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
+        
         <div className="h-[30%] p-5 w-full  bg-white">
-          
+          <h5 onClick={()=>
+            setPanel(false)
+          } >
+          <i class="ri-arrow-down-line"></i>
+          </h5>
           <h4 className="text-3xl font-bold mb-6 text-gray-900">
             Find Trip
           </h4>
