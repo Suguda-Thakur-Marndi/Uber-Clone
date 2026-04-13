@@ -11,7 +11,7 @@ const Home = () => {
     if(panel){
       gsap.to(panelRef.current, { height:'70%' })
     } else {
-      gsap.to(panelRef.current, { height:'30%' })
+      gsap.to(panelRef.current, { height:'0%' })
     }
   }, [panel])
 
@@ -27,7 +27,7 @@ const Home = () => {
       </div>
       <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
       <div className=" flex flex-col justify-end absolute h-screen top-0 w-full px-0  rounded-t-3xl shadow-lg">
-        <div className="h-[30%] p-5 w-full bg-white">
+        <div className="h-[30%] p-5 w-full  bg-white">
           <h4 className="text-3xl font-bold mb-6 text-gray-900">
             Find Trip
           </h4>
