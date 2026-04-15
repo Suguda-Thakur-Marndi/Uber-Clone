@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import 'remixicon/fonts/remixicon.css'
+import Locationpanel from "../componenets/Locationpanel"
 const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
@@ -64,7 +65,8 @@ const Home = () => {
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-red-800 h-[70%] p-5 w-full">
+        <div ref={panelRef} className="bg-white-800 h-[70%] p-5 w-full">
+          <Locationpanel/>
        
 
         </div>
