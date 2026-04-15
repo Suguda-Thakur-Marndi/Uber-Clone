@@ -65,7 +65,7 @@ const Home = () => {
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-white-800 h-[70%] p-5 w-full">
+        <div ref={panelRef} className="bg-white h-[70%] p-5 w-full">
           <Locationpanel/>
        
 
