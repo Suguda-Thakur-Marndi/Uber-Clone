@@ -3,17 +3,22 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import 'remixicon/fonts/remixicon.css'
 const Home = () => {
-  const [pickup, setPickup] = useState('')
-  const [destination, setDestination] = useState('')
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
+  const panelclose = useRef(null)
   
   
   useGSAP(() => {
     if(panel){
       gsap.to(panelRef.current, { height:'70%' })
+      gsap.to(panelclose.current, {
+        opacity:1
+      })
     } else {
       gsap.to(panelRef.current, { height:'0%' })
+      gsap.to(panelclose.current, {
+        opacity:0
+      })
     }
   }, [panel])
 
@@ -31,7 +36,7 @@ const Home = () => {
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
         
         <div className="h-[30%] p-5  w-full    bg-white">
-          <h5 onClick={()=>
+          <h5 ref={panelclose} onClick={()=>
             setPanel(false)
           } >
           <i className="ri-arrow-down-line"></i>
@@ -48,10 +53,6 @@ const Home = () => {
               className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
               type="text" 
               placeholder="📍 Add Pickup location"
-              value={pickup}
-              onChange={(e)=>{
-                setPickup(e.target.value)
-              }}
             />
             <input
               onClick={()=>{
@@ -60,14 +61,11 @@ const Home = () => {
               className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
               type="text" 
               placeholder="🎯 Enter your destination"
-              value={destination}
-              onChange={(e)=>{
-                setDestination(e.target.value)
-              }}
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-white h-[70%] p-5 w-full">
+        <div ref={panelRef} className="bg-red-800 h-[70%] p-5 w-full">
+       
 
         </div>
       </div>
