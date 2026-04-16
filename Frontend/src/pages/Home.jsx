@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <div className="h-screen relative overflow-hidden">
-      <div className="fixed top-0 left-0 right-0 z-10 bg-white shadow-sm">
+      <div className="fixed top-0 left-0 right-0 z-10  shadow-sm">
         <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
       </div>
       <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
@@ -71,7 +71,17 @@ const Home = () => {
 
         </div>
       </div>
+    
+    <div className="fixed z-10 bottom-0">
+      <div>
+        <img src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
+      </div>
+      <h4> Uber go <span ><i class="ri-user-3-line"></i> </span></h4>
+
     </div>
+    </div>
+
+    
   )
 }
   
