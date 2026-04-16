@@ -72,12 +72,15 @@ const Home = () => {
         </div>
       </div>
     
-    <div className="fixed z-10 bottom-0">
-      <div>
-        <img src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
-      </div>
+    <div className="fixed z-10 bg-white bottom-0 p-5">
+      <div className=" flex items-center justify-between">
+        <img className="h-20" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
       <h4> Uber go <span ><i class="ri-user-3-line"></i> </span></h4>
-
+      <h5>2 mins away</h5>
+      <p> Affordable ,Compact rides</p>
+      <div> 
+        193
+      </div></div>
     </div>
     </div>
 
