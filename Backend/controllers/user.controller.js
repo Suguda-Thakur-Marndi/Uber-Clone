@@ -8,26 +8,37 @@ module.exports.registerUser=async(req,res)=>{
             errors:errors.array()
         })
     }
-    const { fullname, email, password }=req.body;
-    const hashedPassword=await User.hashPassword(password);
-
-    const user=await userService.createUser(
-        fullname.firstname,
-        fullname.lastname,
-        email,
-        hashedPassword
-    );
-
-    const token=user.generateAuthToken();
-    res.status(201).json({
-        message:'User registered successfully',
-        user:{
-            _id:user._id,
-            email:user.email,
-            fullname:user.fullname
-        },
-        token
-    });
+    const { fullname, email, password } = req.body;
+    try {
+        const hashedPassword = await User.hashPassword(password);
+        const user = await userService.createUser(
+            fullname.firstname,
+            fullname.lastname,
+            email,
+            hashedPassword
+        );
+        const token = user.generateAuthToken();
+        res.status(201).json({
+            message: 'User registered successfully',
+            user: {
+                _id: user._id,
+                email: user.email,
+                fullname: user.fullname
+            },
+            token
+        });
+    } catch (error) {
+        // Handle duplicate email error
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.email) {
+            return res.status(409).json({
+                message: 'Email already exists. Please use a different email.'
+            });
+        }
+        // Other errors
+        res.status(500).json({
+            message: error.message || 'Internal server error'
+        });
+    }
 }
 module.exports.loginUser=async(req,res)=>{
     const { email, password }=req.body;
