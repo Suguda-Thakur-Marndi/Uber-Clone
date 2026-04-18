@@ -75,14 +75,15 @@ const Home = () => {
     <div className="fixed z-10 bg-white bottom-0 p-5">
       <div className=" flex items-center justify-between">
         <img className="h-20" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
-     <div className="flex ">
+     <div className="flex bg-amber-600 ">
        <h4> Uber go </h4>
-       <span ><i className="ri-user-3-line"></i> </span></div> 
+       <span ><i className="ri-user-3-line"></i> </span>
       <h5>2 mins away</h5>
       <p> Affordable ,Compact rides</p>
-      <div> 
-        193
-      </div>
+      </div > 
+              <div>
+                192
+              </div>
       </div>
     </div>
     </div>
