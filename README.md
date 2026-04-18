@@ -353,6 +353,21 @@ Success response:
 
 Validation error:
 
+## Frontend Home Page
+
+The **Home page** (`/Home`) is the main landing page for authenticated users. It is protected by the `UserProtectedWrapper` component, which ensures that only users with a valid JWT token can access it. If a user is not authenticated, they are redirected to the login page.
+
+**Features:**
+- Displays user-specific information after login
+- Entry point for booking rides and viewing ride status
+- Accessible only to logged-in users
+
+**Route Protection:**
+- The route `/Home` is guarded by `UserProtectedWrapper`.
+- If the JWT token is missing or invalid, users are redirected to `/login`.
+
+For more details, see the implementation in `Frontend/src/pages/Home.jsx` and the route protection logic in `Frontend/src/pages/UserProtectedWrapper.jsx`.
+
 ```json
 {
 	"errors": [
