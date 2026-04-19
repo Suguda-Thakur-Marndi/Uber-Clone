@@ -21,7 +21,7 @@ const Home = () => {
         opacity:0
       })
     }
-  }, [panel]).
+  }, [panel])
 
   const handleSubmit = (e) => {
     e.preventDefault()
