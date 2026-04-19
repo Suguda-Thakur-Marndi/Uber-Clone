@@ -11,7 +11,7 @@ const Home = () => {
   
   useGSAP(() => {
     if(panel){
-      gsap.to(panelRef.current, { height:'70%' })
+      gsap.to(panelRef.current, { height:'80%' })
       gsap.to(panelclose.current, {
         opacity:1
       })
@@ -36,7 +36,7 @@ const Home = () => {
       <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
         
-        <div className="h-[30%] p-5  w-full    bg-white">
+        <div className="h-[20%] p-5  w-full    bg-white">
           <h5 ref={panelclose} onClick={()=>
             setPanel(false)
           } >
@@ -65,7 +65,7 @@ const Home = () => {
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-white h-[70%] p-5 w-full">
+        <div ref={panelRef} className="bg-white h-[80%] p-5 w-full">
           <Locationpanel/>
        
 
