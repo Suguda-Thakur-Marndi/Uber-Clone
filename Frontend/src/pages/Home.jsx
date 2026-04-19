@@ -72,8 +72,11 @@ const Home = () => {
         </div>
       </div>
     
-    <div className="fixed z-10 bg-white bottom-0 p-3">
-      <div className=" flex items-center justify-between">
+    <div className="fixed z-10 bg-white bottom-0 px-3 py-6">
+      <h2 className="text-2xl font-bold">
+        Choose a Vehicle
+      </h2>
+      <div className=" border-2 flex items-center rounded-2xl justify-between">
         <img className="h-20" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
      <div className="flex  ">
        <h4> Uber go </h4>
