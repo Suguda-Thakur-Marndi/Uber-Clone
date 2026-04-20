@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import 'remixicon/fonts/remixicon.css'
-import Locationpanel from "../componenets/Locationpanel"
+import Locationpanel from "../components/Locationpanel"
 const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
@@ -37,11 +37,16 @@ const Home = () => {
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
         
         <div className="h-[20%] p-5  w-full    bg-white">
-          <h5 ref={panelclose} onClick={()=>
-            setPanel(false)
-          } >
-          <i className="ri-arrow-down-line"></i>
-          </h5>
+          <button
+            type="button"
+            ref={panelclose}
+            onClick={()=>
+              setPanel(false)
+            }
+            aria-label="Close panel"
+          >
+          <i className="ri-arrow-down-line" aria-hidden="true"></i>
+          </button>
           <h4 className="text-3xl font-bold mb-6 text-gray-900">
             Find Trip
           </h4>
@@ -72,12 +77,12 @@ const Home = () => {
         </div>
       </div>
     
-    <div className="fixed z-10 bg-white bottom-0 px-3 py-6">
+        <img className="h-20" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="Uber Go vehicle" />
       <h2 className="text-2xl font-bold">
-        Choose a Vehicle
+       <h4> Uber Go </h4>
       </h2>
       <div className=" border-2 flex items-center rounded-2xl justify-between">
-        <img className="h-20" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
+      <p> Affordable, Compact rides</p>
      <div className="flex  ">
        <h4> Uber go </h4>
        <span ><i className="ri-user-3-line"></i> </span>
@@ -89,7 +94,7 @@ const Home = () => {
               </div>
       </div>
     </div>
-    </div>
+    
 
     
   )
