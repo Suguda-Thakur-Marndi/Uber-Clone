@@ -72,7 +72,7 @@ const Home = () => {
         </div>
       </div>
     
-    <div className="fixed z-10 bg-white bottom-0 px-3 py-16">
+    <div className="fixed z-10 bg-white bottom-0 px-3 py-6">
       <h2 className="text-2xl font-bold">
         Choose a Vehicle
       </h2>
