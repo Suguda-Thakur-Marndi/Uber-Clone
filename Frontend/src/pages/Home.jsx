@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import 'remixicon/fonts/remixicon.css'
-import Locationpanel from "../components/Locationpanel"
+import Locationpanel from "../componenets/Locationpanel"
 const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
