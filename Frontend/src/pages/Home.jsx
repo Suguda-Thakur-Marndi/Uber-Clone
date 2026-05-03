@@ -9,6 +9,7 @@ const Home = () => {
   const panelclose = useRef(null)
   const vichelpanelref = useRef(null)
   const [vichelpanel, setvichelpanel] = useState(false)
+const [vichelopen, setvichelopen] = useState(false)
   
   
   useGSAP(() => {
@@ -24,6 +25,18 @@ const Home = () => {
       })
     }
   }, [panel])
+  useGSAP(()=>{
+    if(vichelpanel){
+      gsap.to(vichelpanelref.current,{
+        transform:'translateY(0)'
+      } )
+    }
+    else{
+      gsap.to(vichelpanelref.current,{
+       transform:'translateY(100%)'
+      })
+    }
+  },[vichelpanel])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -39,7 +52,7 @@ const Home = () => {
       <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
         
-        <div className="h-[20%] p-5  w-full    bg-white">
+        <div className="h-[20%] pb-6 px-6  w-full    bg-white">
           <button
             type="button"
             ref={panelclose}
@@ -74,12 +87,21 @@ const Home = () => {
           </form>
         </div>
         <div ref={panelRef} className="bg-white h-[80%] p-5 w-full">
-          <Locationpanel vichelpanel={vichelpanel} setvichelpanel={setvichelpanel}/>
+          <Locationpanel vichelpanel={vichelpanel} setvichelpanel={setvichelpanel} setPanel={setPanel}/>
        
 
         </div>
       </div>                                        
-      <div ref={vichelpanelref} className="absolute bottom-0 left-0 right-0  bg-white p-3 shadow-lg">
+      <div ref={vichelpanelref} className="absolute bottom-0 left-0 right-0 translate-y-full bg-white p-3 shadow-lg">
+        <button
+          type="button"
+          onClick={()=>{
+            setvichelpanel(false)
+          }}
+          aria-label="Close vehicle panel"
+        >
+          <i className="ri-arrow-down-line" aria-hidden="true"></i>
+        </button>
         <h3 className="text-2xl font-bold mb-4">Choose Vehicle</h3>
    
         <div className="border-2 active:border-black border-gray-200 flex items-center rounded-2xl justify-between p-.5 gap-4">

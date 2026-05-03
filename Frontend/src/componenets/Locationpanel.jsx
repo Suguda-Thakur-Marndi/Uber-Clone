@@ -1,6 +1,9 @@
 import React from 'react'
+const Locationsearchpanel=(props)=>{
+  console.log(props)
+}
 
-const Locationpanel = () => {
+const Locationpanel = (props) => {
     const Location = [
         'Sample location address',
         'Lorem ipsum dolor sit amet.',
@@ -10,9 +13,12 @@ const Locationpanel = () => {
   return (
     <div className='flex pt-11 flex-col gap-10'>
       {Location.map((location, index) => (
-        <div
+        <div onClick={()=>{
+          props.setPanel(false)
+          props.setvichelpanel(true)
+        }}
           key={index}
-          className='flex items-center border-2 active:border-black rounded-lg gap-4 justify-start'
+          className='flex items-center active:border-2 active:border-black rounded-lg gap-4 justify-start'
         >
           <h2 className='bg-[#eee] h-10 w-10 items-center flex justify-center rounded-4xl'>
             <i className="ri-map-pin-line"></i>
