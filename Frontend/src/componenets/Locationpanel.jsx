@@ -33,7 +33,6 @@ const Locationpanel = () => {
     {Location[3]}
         </h4>
        </div>
-
     </div>
   )
 }
