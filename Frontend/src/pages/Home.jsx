@@ -7,6 +7,8 @@ const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
   const panelclose = useRef(null)
+  const vichelpanelref = useRef(null)
+  const [vichelpanel, setvichelpanel] = useState(false)
   
   
   useGSAP(() => {
@@ -27,6 +29,7 @@ const Home = () => {
     e.preventDefault()
     setPanel(!panel)
   }
+  
 
   return (
     <div className="h-screen relative overflow-hidden">
@@ -71,13 +74,12 @@ const Home = () => {
           </form>
         </div>
         <div ref={panelRef} className="bg-white h-[80%] p-5 w-full">
-          <Locationpanel/>
+          <Locationpanel vichelpanel={vichelpanel} setvichelpanel={setvichelpanel}/>
        
 
         </div>
-      </div>
-    
-      <div className="absolute bottom-0 left-0 right-0 translate-y-full bg-white p-3 shadow-lg">
+      </div>                                        
+      <div ref={vichelpanelref} className="absolute bottom-0 left-0 right-0  bg-white p-3 shadow-lg">
         <h3 className="text-2xl font-bold mb-4">Choose Vehicle</h3>
    
         <div className="border-2 active:border-black border-gray-200 flex items-center rounded-2xl justify-between p-.5 gap-4">
