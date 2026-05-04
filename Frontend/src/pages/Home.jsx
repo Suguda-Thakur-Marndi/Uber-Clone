@@ -111,7 +111,7 @@ const Home = () => {
       <Vichelpanel setvichelpanel={setvichelpanel} vichelpanelref={vichelpanelref} prop={{ conformrideref: setConfirmRideOpen }}/>
       </div>
       <div ref={conformridepanel} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
-<Confirmvichel/>
+<Confirmvichel setConfirmVichelpanel={setConfirmRideOpen}/>
       </div>
       
     </div>
