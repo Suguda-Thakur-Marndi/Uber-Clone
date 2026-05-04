@@ -4,12 +4,14 @@ import gsap from "gsap"
 import 'remixicon/fonts/remixicon.css'
 import Locationpanel from "../componenets/Locationpanel"
 import Vichelpanel from "../componenets/Vichelpanel"
+import Confirmvichel from "../componenets/Confirmvichel"
 const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
   const panelclose = useRef(null)
   const vichelpanelref = useRef(null)
-  const conformrideref = useRef(null)
+  const conformridepanel = useRef(null)
+  const [conformrideref, setconformrideref] = useState(false)
   const [vichelpanel, setvichelpanel] = useState(false)
 const [vichelopen, setvichelopen] = useState(false)
   
@@ -35,6 +37,18 @@ const [vichelopen, setvichelopen] = useState(false)
     }
     else{
       gsap.to(vichelpanelref.current,{
+       transform:'translateY(100%)'
+      })
+    }
+  },[vichelpanel])
+  useGSAP(()=>{
+    if(conformridepanel){
+      gsap.to(conformrideref.current,{
+        transform:'translateY(0)'
+      } )
+    }
+    else{
+      gsap.to(conformrideref.current,{
        transform:'translateY(100%)'
       })
     }
@@ -97,8 +111,8 @@ const [vichelopen, setvichelopen] = useState(false)
       <div>                                        
       <Vichelpanel setvichelpanel={setvichelpanel} vichelpanelref={vichelpanelref}/>
       </div>
-      <div ref={conformrideref} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
-
+      <div ref={conformridepanel} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
+<Confirmvichel/>
       </div>
       
     </div>
