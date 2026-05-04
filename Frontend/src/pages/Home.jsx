@@ -11,9 +11,8 @@ const Home = () => {
   const panelclose = useRef(null)
   const vichelpanelref = useRef(null)
   const conformridepanel = useRef(null)
-  const [conformrideref, setconformrideref] = useState(false)
   const [vichelpanel, setvichelpanel] = useState(false)
-const [vichelopen, setvichelopen] = useState(false)
+  const [confirmRideOpen, setConfirmRideOpen] = useState(false)
   
   
   useGSAP(() => {
@@ -42,17 +41,17 @@ const [vichelopen, setvichelopen] = useState(false)
     }
   },[vichelpanel])
   useGSAP(()=>{
-    if(conformridepanel){
-      gsap.to(conformrideref.current,{
+    if(confirmRideOpen){
+      gsap.to(conformridepanel.current,{
         transform:'translateY(0)'
       } )
     }
     else{
-      gsap.to(conformrideref.current,{
+      gsap.to(conformridepanel.current,{
        transform:'translateY(100%)'
       })
     }
-  },[vichelpanel])
+  },[confirmRideOpen])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -108,8 +107,8 @@ const [vichelopen, setvichelopen] = useState(false)
 
         </div>
       </div>
-      <div>                                        
-      <Vichelpanel setvichelpanel={setvichelpanel} vichelpanelref={vichelpanelref}/>
+      <div>
+      <Vichelpanel setvichelpanel={setvichelpanel} vichelpanelref={vichelpanelref} prop={{ conformrideref: setConfirmRideOpen }}/>
       </div>
       <div ref={conformridepanel} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
 <Confirmvichel/>
