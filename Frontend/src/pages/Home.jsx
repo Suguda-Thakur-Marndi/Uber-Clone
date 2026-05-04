@@ -67,38 +67,49 @@ const Home = () => {
       <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
         
-        <div className="h-[20%] pb-6 px-6  w-full    bg-white">
+        <div className="h-[20%] pb-6 px-6 w-full bg-white">
           <button
             type="button"
             ref={panelclose}
             onClick={()=>
               setPanel(false)
             }
+            className="text-gray-500 hover:text-gray-900 transition mb-2"
             aria-label="Close panel"
           >
-          <i className="ri-arrow-down-line" aria-hidden="true"></i>
+          <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
           </button>
-          <h4 className="text-3xl font-bold mb-6 text-gray-900">
+          <h4 className="text-3xl font-bold mb-4 text-gray-900">
             Find Trip
           </h4>
-          <form className="space-y-4 relative" onSubmit={handleSubmit}>
-            <div className="absolute left-7 py-3.5 top-0 h-full rounded-full w-1 flex-col bg-black"></div>
-            <input 
-              onClick={()=>{
-                setPanel(true)
-              }}
-              className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
-              type="text" 
-              placeholder="📍 Add Pickup location"
-            />
-            <input
-              onClick={()=>{
-                setPanel(true)
-              }} 
-              className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black transition pl-12" 
-              type="text" 
-              placeholder="🎯 Enter your destination"
-            />
+          <form className="space-y-3 relative" onSubmit={handleSubmit}>
+            <div className="relative">
+              <div className="absolute left-3 top-3.5 text-green-600 text-lg flex items-center">
+                <i className="ri-map-pin-2-fill"></i>
+              </div>
+              <input 
+                onClick={()=>{
+                  setPanel(true)
+                }}
+                className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black focus:bg-white transition pl-10 font-medium" 
+                type="text" 
+                placeholder="Pickup location"
+              />
+            </div>
+            
+            <div className="relative">
+              <div className="absolute left-3 top-3.5 text-red-500 text-lg flex items-center">
+                <i className="ri-map-pin-fill"></i>
+              </div>
+              <input
+                onClick={()=>{
+                  setPanel(true)
+                }} 
+                className="bg-gray-100 px-4 py-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black focus:bg-white transition pl-10 font-medium" 
+                type="text" 
+                placeholder="Where to?"
+              />
+            </div>
           </form>
         </div>
         <div ref={panelRef} className="bg-white h-[80%] p-5 w-full">
