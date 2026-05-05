@@ -6,7 +6,7 @@ const Confirmvichel = (props) => {
         <button 
           type="button"
           onClick={()=>{
-            props.setConfirmVichelpanel?.(false)
+            props.onClose?.()
           }}
           className="text-gray-600 hover:text-gray-900 transition mb-2"
           aria-label="Close"
@@ -56,7 +56,9 @@ const Confirmvichel = (props) => {
           </div>
         </div>
         
-        <button 
+        <button onClick={()=>{
+          props.onConfirmRide?.()
+        }}
           type="button"
           className="w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition active:scale-95"
         >

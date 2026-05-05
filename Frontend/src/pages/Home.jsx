@@ -6,15 +6,17 @@ import Locationpanel from "../componenets/Locationpanel"
 import Vichelpanel from "../componenets/Vichelpanel"
 import Confirmvichel from "../componenets/Confirmvichel"
 import WaiteforDriver from "../componenets/WaiteforDriver"
+import LookingforDriver from "../componenets/LookingforDriver"
 const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
   const panelclose = useRef(null)
   const vichelpanelref = useRef(null)
   const conformridepanel = useRef(null)
+    const vichelfoundpanel = useRef(null)
   const [vichelpanel, setvichelpanel] = useState(false)
   const [confirmRideOpen, setConfirmRideOpen] = useState(false)
-  
+  const [VichelFound, setVichelFound] = useState(false)
   
   useGSAP(() => {
     if(panel){
@@ -53,6 +55,18 @@ const Home = () => {
       })
     }
   },[confirmRideOpen])
+  useGSAP(()=>{
+    if(VichelFound){
+      gsap.to(vichelfoundpanel.current,{
+        transform:'translateY(0)'
+      } )
+    }
+    else{
+      gsap.to(vichelfoundpanel.current,{
+       transform:'translateY(100%)'
+      })
+    }
+  },[VichelFound])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -123,10 +137,16 @@ const Home = () => {
       <Vichelpanel setvichelpanel={setvichelpanel} vichelpanelref={vichelpanelref} prop={{ conformrideref: setConfirmRideOpen }}/>
       </div>
       <div ref={conformridepanel} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
-<Confirmvichel setConfirmVichelpanel={setConfirmRideOpen}/>
+        <Confirmvichel 
+          onClose={() => setConfirmRideOpen(false)}
+          onConfirmRide={() => {
+            setConfirmRideOpen(false)
+            setVichelFound(true)
+          }} 
+        />
       </div>
-        <div className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
-<WaiteforDriver/>
+        <div ref={vichelfoundpanel} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
+        <LookingforDriver onClose={() => setVichelFound(false)} />
       </div>
       
     </div>

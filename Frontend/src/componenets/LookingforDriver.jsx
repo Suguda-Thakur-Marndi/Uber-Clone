@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WaiteforDriver = (props) => {
+const LookingforDriver = (props) => {
   return (
     <div className="p-5 space-y-4">
         <button 
@@ -60,10 +60,10 @@ const WaiteforDriver = (props) => {
           type="button"
           className="w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition active:scale-95"
         >
-          Confirm Ride
+          Looking for Driver
         </button>
     </div>
   )
 }
 
-export default WaiteforDriver
+export default LookingforDriver
