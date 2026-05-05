@@ -2,7 +2,7 @@ import React from 'react'
 
 const WaiteforDriver = (props) => {
   return (
-    <div className="p-5 space-y-4">
+   <div className="p-5 space-y-4">
         <button 
           type="button"
           onClick={()=>{
@@ -14,15 +14,37 @@ const WaiteforDriver = (props) => {
          <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
         </button>
         
-        <h3 className="text-2xl font-bold text-gray-900">Confirm your Ride</h3>
+      
         
         <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-          <div className="flex items-center gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
-            <img className="h-24 w-24 object-cover rounded" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="Uber Go vehicle" /> 
+          <div className="flex items-start gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
+           
+            <div className="w-24 flex-shrink-0">
+              <img
+                src={props.driverPhoto || 'https://via.placeholder.com/96'}
+                alt="Driver"
+                className="w-24 h-24 rounded-full object-cover"
+              />
+              <div className="mt-2 space-y-2">
+                <button className="w-full text-xs bg-gray-100 rounded-md py-1">Safety</button>
+                <button className="w-full text-xs bg-gray-100 rounded-md py-1">Share my trip</button>
+              </div>
+            </div>
+
+            {/* Right: driver details */}
             <div className="flex-1">
-              <h4 className="font-bold text-lg">Uber Go</h4>
-              <p className="text-gray-600 text-sm">Affordable, Compact rides</p>
-             
+              <h4 className="font-bold text-lg">{props.driverName || 'Driver Name'}</h4>
+              <p className="text-gray-600 text-sm">{props.vehicleInfo || 'Uber Go • Affordable, Compact rides'}</p>
+              <div className="mt-3 text-sm text-gray-700 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-500">Phone</span>
+                  <span className="font-medium">{props.driverNumber || 'N/A'}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-500">Vehicle</span>
+                  <span className="font-medium">{props.driverPlate || props.vehiclePlate || 'Plate N/A'}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -56,12 +78,7 @@ const WaiteforDriver = (props) => {
           </div>
         </div>
         
-        <button 
-          type="button"
-          className="w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition active:scale-95"
-        >
-          Confirm Ride
-        </button>
+        
     </div>
   )
 }

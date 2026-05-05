@@ -17,6 +17,7 @@ const UserLogin = () => {
       })
       if(response.status === 200){
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('userType', 'user')
         setUser(response.data.user)
         navigate('/Home')
       }

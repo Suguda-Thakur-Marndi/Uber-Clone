@@ -22,6 +22,7 @@ const DriverSign = () => {
 
       if (response.status === 200) {
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('userType', 'driver')
         setDriver(response.data.driver)
         navigate('/Driverhome')
       }

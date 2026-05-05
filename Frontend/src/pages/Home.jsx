@@ -13,7 +13,9 @@ const Home = () => {
   const panelclose = useRef(null)
   const vichelpanelref = useRef(null)
   const conformridepanel = useRef(null)
-    const vichelfoundpanel = useRef(null)
+  const vichelfoundpanel = useRef(null)
+  const waitingfordriverref = useRef(null)
+  const [waitingfordriver, setwaitingfordriver] = useState(false)
   const [vichelpanel, setvichelpanel] = useState(false)
   const [confirmRideOpen, setConfirmRideOpen] = useState(false)
   const [VichelFound, setVichelFound] = useState(false)
@@ -67,6 +69,18 @@ const Home = () => {
       })
     }
   },[VichelFound])
+  useGSAP(()=>{
+    if(waitingfordriver){
+      gsap.to(waitingfordriverref.current,{
+        transform:'translateY(0)'
+      } )
+    }
+    else{
+      gsap.to(waitingfordriverref.current,{
+       transform:'translateY(100%)'
+      })
+    }
+  },[waitingfordriver])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -148,12 +162,12 @@ const Home = () => {
         <div ref={vichelfoundpanel} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
         <LookingforDriver onClose={() => setVichelFound(false)} />
       </div>
+      <div ref={waitingfordriverref} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
+        <WaiteforDriver/>
+      </div>
+      
       
     </div>
-    
-    
-
-    
   )
 }
   
