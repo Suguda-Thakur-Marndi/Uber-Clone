@@ -5,6 +5,7 @@ import 'remixicon/fonts/remixicon.css'
 import Locationpanel from "../componenets/Locationpanel"
 import Vichelpanel from "../componenets/Vichelpanel"
 import Confirmvichel from "../componenets/Confirmvichel"
+import WaiteforDriver from "../componenets/WaiteforDriver"
 const Home = () => {
   const [panel, setPanel] = useState(false)
   const panelRef = useRef(null)
@@ -123,6 +124,9 @@ const Home = () => {
       </div>
       <div ref={conformridepanel} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
 <Confirmvichel setConfirmVichelpanel={setConfirmRideOpen}/>
+      </div>
+        <div className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
+<WaiteforDriver/>
       </div>
       
     </div>

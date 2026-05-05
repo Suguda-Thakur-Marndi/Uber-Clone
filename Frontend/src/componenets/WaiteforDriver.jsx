@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Confirmvichel = (props) => {
+const WaiteforDriver = () => {
   return (
     <div className="p-5 space-y-4">
         <button 
@@ -66,4 +66,4 @@ const Confirmvichel = (props) => {
   )
 }
 
-export default Confirmvichel
+export default WaiteforDriver
