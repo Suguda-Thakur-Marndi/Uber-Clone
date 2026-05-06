@@ -13,6 +13,7 @@ const DriverSignup = () => {
   const [vehicleColour, setVehicleColour] = useState('')
   const [vehicleCapacity, setVehicleCapacity] = useState('')
   const [vehicleType, setVehicleType] = useState('sedan')
+  const [vehicleNumberPlate, setVehicleNumberPlate] = useState('')
   const { setDriver } = useContext(DriverDataContext)
 
   const submitHandler = async (e) => {
@@ -28,7 +29,8 @@ const DriverSignup = () => {
       vehicle: {
         colour: vehicleColour,
         capacity: parseInt(vehicleCapacity),
-        vehicleType: vehicleType
+        vehicleType: vehicleType,
+        vehicleNumberPlate: vehicleNumberPlate
       }
     }
 
@@ -56,6 +58,7 @@ const DriverSignup = () => {
         setVehicleColour('')
         setVehicleCapacity('')
         setVehicleType('sedan')
+        setVehicleNumberPlate('')
       }
     } catch (error) {
       console.error('Driver signup failed:', error?.response?.data || error.message)
@@ -110,6 +113,11 @@ const DriverSignup = () => {
             <option value="van">Van</option>
             <option value="truck">Truck</option>
           </select>
+
+          <h3 className="text-xl">Vehicle Number Plate</h3>
+          <input type="text" value={vehicleNumberPlate} onChange={(e) => {
+            setVehicleNumberPlate(e.target.value)
+          }} className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full" placeholder="e.g., MH02AB1234" required />
 
           <button className="bg-[#111] text-white mb-7 rounded px-4 py-2 border w-full">
             Create Account

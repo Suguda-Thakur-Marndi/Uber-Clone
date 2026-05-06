@@ -20,7 +20,8 @@ module.exports.registerDriver = async (req, res) => {
         hashedPassword,
         vehicle.colour,
         vehicle.capacity,
-        vehicle.vehicleType
+        vehicle.vehicleType,
+        vehicle.vehicleNumberPlate
     );
 
     const token = driver.generateAuthToken();

@@ -7,6 +7,7 @@ import { DriverDataContext } from '../assets/context/Drivercontext'
 const DriverSign = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [vehicleNumberPlate, setVehicleNumberPlate] = useState('')
   const { setDriver } = useContext(DriverDataContext)
   const navigate = useNavigate()
    
@@ -15,6 +16,7 @@ const DriverSign = () => {
     e.preventDefault()
     const driverData = {
       email: email,
+      vehicleNumberPlate: vehicleNumberPlate,
       password: password
     }
     try {
@@ -24,7 +26,7 @@ const DriverSign = () => {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('userType', 'driver')
         setDriver(response.data.driver)
-        navigate('/Driverhome')
+        navigate('/driverhome')
       }
     } catch (error) {
       console.error('Driver login failed:', error?.response?.data || error.message)
@@ -32,6 +34,7 @@ const DriverSign = () => {
     }
     setEmail('')
     setPassword('')
+    setVehicleNumberPlate('')
   }
 
   return (
@@ -55,6 +58,21 @@ const DriverSign = () => {
               type="email"
               placeholder="Your email"
             />
+            <h3 className="mb-2 text-xl">
+              Vehicle Number Plate
+            </h3>
+            <input
+              className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full"
+              value={vehicleNumberPlate}
+              onChange={(e) => setVehicleNumberPlate(e.target.value)}
+              required
+              type="text"
+              placeholder="Enter vehicle number plate"
+            />
+            
+            {vehicleNumberPlate && (
+              <div className="text-sm text-gray-600 mb-4">Vehicle Plate: {vehicleNumberPlate}</div>
+            )}
             <h3 className="mb-2 text-xl">
               Enter Your Password
             </h3>

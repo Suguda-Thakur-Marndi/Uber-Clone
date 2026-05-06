@@ -48,6 +48,12 @@ const driverSchema = new mongoose.Schema({
             type: String,
             required: true,
            enum: ['sedan', 'suv', 'hatchback', 'van', 'truck']
+        },
+        vehicleNumberPlate:{
+            type: String,
+            required: true,
+            unique: true,
+            minlength: [3, 'Vehicle number plate must be at least 3 characters']
         }
     },
     location: {
