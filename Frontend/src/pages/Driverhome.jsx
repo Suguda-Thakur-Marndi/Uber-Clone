@@ -1,6 +1,6 @@
 const DriverHome = () => {
   return (
-    <div>Driver-home</div>
+    <div >Driver-home</div>
   )
 }
 
