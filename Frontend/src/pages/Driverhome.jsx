@@ -1,6 +1,6 @@
 const DriverHome = () => {
   return (
-    <div >Driver-home</div>
+    <div className="p-10 bg-red-200 flex justify-center " >Driver-home</div>
   )
 }
 
