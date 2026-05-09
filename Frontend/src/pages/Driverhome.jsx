@@ -1,6 +1,20 @@
-const DriverHome = (props) => {
+import React from 'react'
+
+const WaitingForDriver = (props) => {
   return (
-      <div className="p-5 space-y-4">
+   <div 
+     className="relative min-h-screen w-full flex flex-col justify-end p-5 bg-cover bg-center bg-no-repeat bg-fixed"
+     style={{
+       backgroundImage: 'url(https://i.sstatic.net/gtiI7.gif)'
+     }}
+   >
+     <div className="w-full max-w-md mx-auto space-y-4">
+        <img
+          className="absolute right-3 top-3 h-16 w-24 p-4 opacity-10 pointer-events-none select-none"
+          src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
+          alt="Uber logo"
+          aria-hidden="true"
+        />
         <button 
           type="button"
           onClick={()=>{
@@ -11,15 +25,13 @@ const DriverHome = (props) => {
         >
          <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
         </button>
-        
-      
-        
+
         <div className="bg-gray-50 rounded-lg p-4 space-y-3">
           <div className="flex items-start gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
            
             <div className="w-24 shrink-0">
               <img
-                src={props.driverPhoto || 'https://via.placeholder.com/96'}
+                src={props.driverPhoto || 'https://placeholder.co/96x96'}
                 alt="Driver"
                 className="w-24 h-24 rounded-full object-cover"
               />
@@ -29,7 +41,6 @@ const DriverHome = (props) => {
               </div>
             </div>
 
-            {/* Right: driver details */}
             <div className="flex-1">
               <h4 className="font-bold text-lg">{props.driverName || 'Driver Name'}</h4>
               <p className="text-gray-600 text-sm">{props.vehicleInfo || 'Uber Go • Affordable, Compact rides'}</p>
@@ -76,9 +87,9 @@ const DriverHome = (props) => {
           </div>
         </div>
         
-        
+        </div>
     </div>
   )
 }
 
-export default DriverHome
+export default WaitingForDriver

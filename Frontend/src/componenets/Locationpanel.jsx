@@ -11,7 +11,18 @@ const Locationpanel = (props) => {
         'Lorem ipsum dolor sit amet.'
     ]
   return (
-    <div className='flex pt-11 flex-col gap-10'>
+    <div className='flex flex-col gap-10'>
+      <button 
+        type="button"
+        onClick={()=>{
+          props.setPanel(false)
+        }}
+        className="text-gray-600 hover:text-gray-900 transition mb-2"
+        aria-label="Close"
+      >
+        <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
+      </button>
+      <div className='flex pt-11 flex-col gap-10'>
       {Location.map((location, index) => (
         <div onClick={()=>{
           props.setPanel(false)
@@ -26,6 +37,7 @@ const Locationpanel = (props) => {
           <h4 className='font-medium'>{location}</h4>
         </div>
       ))}
+      </div>
     </div>
   )
 }

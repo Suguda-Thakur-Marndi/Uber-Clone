@@ -21,7 +21,7 @@ const WaiteforDriver = (props) => {
            
             <div className="w-24 flex-shrink-0">
               <img
-                src={props.driverPhoto || 'https://via.placeholder.com/96'}
+                src={props.driverPhoto || 'https://placeholder.co/96x96'}
                 alt="Driver"
                 className="w-24 h-24 rounded-full object-cover"
               />
@@ -30,6 +30,7 @@ const WaiteforDriver = (props) => {
                 <button className="w-full text-xs bg-gray-100 rounded-md py-1">Share my trip</button>
               </div>
             </div>
+
 
             <div className="flex-1">
               <h4 className="font-bold text-lg">{props.driverName || 'Driver Name'}</h4>
