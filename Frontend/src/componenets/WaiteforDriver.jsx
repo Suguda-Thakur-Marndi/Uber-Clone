@@ -31,7 +31,6 @@ const WaiteforDriver = (props) => {
               </div>
             </div>
 
-            {/* Right: driver details */}
             <div className="flex-1">
               <h4 className="font-bold text-lg">{props.driverName || 'Driver Name'}</h4>
               <p className="text-gray-600 text-sm">{props.vehicleInfo || 'Uber Go • Affordable, Compact rides'}</p>
