@@ -15,6 +15,7 @@ const WaitingForDriver = (props) => {
           alt="Uber logo"
           aria-hidden="true"
         />
+
         <button 
           type="button"
           onClick={()=>{
@@ -31,7 +32,7 @@ const WaitingForDriver = (props) => {
            
             <div className="w-24 shrink-0">
               <img
-                src={props.driverPhoto || 'https://placeholder.co/96x96'}
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF6gyQIHww9J6JiEsHZYk5AIbvPf7CvDUl1A&s"
                 alt="Driver"
                 className="w-24 h-24 rounded-full object-cover"
               />
@@ -40,7 +41,7 @@ const WaitingForDriver = (props) => {
                 <button className="w-full text-xs bg-gray-100 rounded-md py-1">Share my trip</button>
               </div>
             </div>
-
+                
             <div className="flex-1">
               <h4 className="font-bold text-lg">{props.driverName || 'Driver Name'}</h4>
               <p className="text-gray-600 text-sm">{props.vehicleInfo || 'Uber Go • Affordable, Compact rides'}</p>
