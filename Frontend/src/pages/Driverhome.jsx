@@ -22,9 +22,13 @@ const WaitingForDriver = (props) => {
 
   return (
     <div
+    
       className="relative min-h-screen w-full flex flex-col justify-end p-5 bg-cover bg-center bg-no-repeat bg-fixed"
       style={{ backgroundImage: "url('https://i.sstatic.net/gtiI7.gif')" }}
     >
+       <div className="fixed top-0 left-0 right-0 z-10  shadow-sm">
+        <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
+      </div>
       <div className="w-full max-w-md mx-auto space-y-4">
         
         
