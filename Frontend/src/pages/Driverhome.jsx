@@ -19,7 +19,7 @@ const WaitingForDriver = (props) => {
       })
     }
   },[Driverpanel])
-
+.
   return (
     <div
       className="relative min-h-screen w-full flex flex-col justify-end p-5 bg-cover bg-center bg-no-repeat bg-fixed"
