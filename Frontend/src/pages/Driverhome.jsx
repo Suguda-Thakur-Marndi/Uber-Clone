@@ -1,29 +1,24 @@
-import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import React, { useRef , useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
 const WaitingForDriver = (props) => {
-  const Driverpanelcloseref = useRef(null)
-  const [Driverpanel, setDriverpanel] = useState(false)
-  useGSAP(()=>{
-    if(Driverpanel){
-      gsap.to(Driverpanelcloseref.current,{
-        transform:'translateY(0)',
-        duration: 0.5
-      })
+  const driverPanelCloseRef = useRef(null)
+  const [driverPanel, setDriverPanel] = useState(true)
+
+  useEffect(() => {
+    const el = driverPanelCloseRef.current
+    if (!el) return
+    if (driverPanel) {
+      gsap.to(el, { transform: 'translateY(0)', duration: 0.5 })
+    } else {
+      gsap.to(el, { transform: 'translateY(80%)', duration: 0.5 })
     }
-    else{
-      gsap.to(Driverpanelcloseref.current,{
-        transform:'translateY(100%)',
-        duration: 0.5
-      })
-    }
-  },[Driverpanel])
+  }, [driverPanel])
 
   return (
     <div
     
-      className="relative min-h-screen w-full flex flex-col justify-end p-5 bg-cover bg-center bg-no-repeat bg-fixed"
+      className="relative h-screen w-full flex flex-col justify-end p-5 bg-cover bg-center bg-no-repeat bg-fixed overflow-hidden"
       style={{ backgroundImage: "url('https://i.sstatic.net/gtiI7.gif')" }}
     >
        <div className="fixed top-0 left-0 right-0 z-10  shadow-sm">
@@ -33,17 +28,15 @@ const WaitingForDriver = (props) => {
         
         
 
-        <div ref={Driverpanelcloseref} className="bg-gray-50 rounded-lg p-4 space-y-3" style={{ transform: 'translateY(100%)' }}>
+        <div ref={driverPanelCloseRef} className="bg-gray-50 rounded-lg p-4 space-y-3 overflow-y-auto max-h-screen" style={{ transform: 'translateY(80%)' }}>
           
           
           <button
-            onClick={()=>{
-              setDriverpanel(false)
-            }}
+            onClick={() => setDriverPanel(!driverPanel)}
             className="w-full flex justify-center py-2 hover:bg-gray-200 rounded-lg transition"
-            aria-label="Close panel"
+            aria-label="Toggle panel"
           >
-            <i className="ri-arrow-down-line text-xl text-gray-600 hover:text-gray-900" aria-hidden="true"></i>
+            <i className={`ri-arrow-${driverPanel ? 'down' : 'up'}-line text-xl text-gray-600 hover:text-gray-900`} aria-hidden="true"></i>
           </button>
 
           <div className="flex items-start gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
