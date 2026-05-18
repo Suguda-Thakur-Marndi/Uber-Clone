@@ -11,7 +11,7 @@ const WaitingForDriver = (props) => {
     if (driverPanel) {
       gsap.to(el, { transform: 'translateY(0)', duration: 0.5 })
     } else {
-      gsap.to(el, { transform: 'translateY(80%)', duration: 0.5 })
+      gsap.to(el, { transform: 'translateY(90%)', duration: 0.5 })
     }
   }, [driverPanel])
 
@@ -28,7 +28,7 @@ const WaitingForDriver = (props) => {
         
         
 
-        <div ref={driverPanelCloseRef} className="bg-gray-50 rounded-lg p-4 space-y-3 overflow-y-auto max-h-screen" style={{ transform: 'translateY(80%)' }}>
+        <div ref={driverPanelCloseRef} className="bg-gray-50 rounded-lg p-4 space-y-3 overflow-y-auto max-h-screen" style={{ transform: 'translateY(9)' }}>
           
           
           <button
