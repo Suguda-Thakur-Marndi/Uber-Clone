@@ -1,6 +1,7 @@
 import gsap from 'gsap'
 import 'remixicon/fonts/remixicon.css'
 import React, { useRef, useState, useEffect } from 'react'
+import Ridepopup from '../componenets/Raidepopup'
 
 const WaitingForDriver = (props) => {
   const driverPanelCloseRef = useRef(null)
@@ -63,6 +64,7 @@ const WaitingForDriver = (props) => {
        </div>
      </div>
       </div>
+      <Ridepopup />
     </div>
   )
 }
