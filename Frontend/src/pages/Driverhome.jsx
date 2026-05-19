@@ -1,17 +1,18 @@
 import gsap from 'gsap'
+import 'remixicon/fonts/remixicon.css'
 import React, { useRef, useState, useEffect } from 'react'
 
 const WaitingForDriver = (props) => {
   const driverPanelCloseRef = useRef(null)
-  const [driverPanel, setDriverPanel] = useState(true)
+  const [driverPanel, setDriverPanel] = useState(false)
 
   useEffect(() => {
-    const el = driverPanelCloseRef.current
-    if (!el) return
+   
+    if (!driverPanelCloseRef.current) return
     if (driverPanel) {
-      gsap.to(el, { transform: 'translateY(0)', duration: 0.5 })
+      gsap.to(driverPanelCloseRef.current, { transform: 'translateY(0)', duration: 0.5 })
     } else {
-      gsap.to(el, { transform: 'translateY(90%)', duration: 0.5 })
+      gsap.to(driverPanelCloseRef.current, { transform: 'translateY(90%)', duration: 0.5 })
     }
   }, [driverPanel])
 
@@ -22,9 +23,16 @@ const WaitingForDriver = (props) => {
       style={{ backgroundImage: "url('https://i.sstatic.net/gtiI7.gif')" }}
     >
        <div className="fixed top-0 left-0 right-0 z-10  shadow-sm">
+        
         <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
       </div>
-      <div className="w-full bg-white max-w-md mx-auto rounded-xl shadow-md p-4">
+      
+      <div ref={driverPanelCloseRef } className="w-full bg-white max-w-md mx-auto rounded-xl shadow-md p-4">
+        <div   onClick={()=>{
+          setDriverPanel(!driverPanel)
+        }} className='flex justify-center w-full'>
+          <i className="ri-arrow-down-s-line text-4xl"></i>
+        </div>
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center justify-start gap-3">
             <img
