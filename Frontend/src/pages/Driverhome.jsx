@@ -24,82 +24,36 @@ const WaitingForDriver = (props) => {
        <div className="fixed top-0 left-0 right-0 z-10  shadow-sm">
         <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
       </div>
-      <div className="w-full max-w-md mx-auto space-y-4">
-        
-        
-
-        <div ref={driverPanelCloseRef} className="bg-gray-50 rounded-lg p-4 space-y-3 overflow-y-auto max-h-screen" style={{ transform: 'translateY(9)' }}>
-          
-          
-          <button
-            onClick={() => setDriverPanel(!driverPanel)}
-            className="w-full flex justify-center py-2 hover:bg-gray-200 rounded-lg transition"
-            aria-label="Toggle panel"
-          >
-            <i className={`ri-arrow-${driverPanel ? 'down' : 'up'}-line text-xl text-gray-600 hover:text-gray-900`} aria-hidden="true"></i>
-          </button>
-
-          <div className="flex items-start gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
-            <div className="w-24 shrink-0">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF6gyQIHww9J6JiEsHZYk5AIbvPf7CvDUl1A&s"
-                alt="Driver"
-                className="w-24 h-24 rounded-full object-cover"
-              />
-              <div className="mt-2 space-y-2">
-                <button className="w-full text-xs bg-gray-100 rounded-md py-1">Safety</button>
-                <button className="w-full text-xs bg-gray-100 rounded-md py-1">Share my trip</button>
-              </div>
-            </div>
-
-            <div className="flex-1">
-              <h4 className="font-bold text-lg">{props.driverName || 'Driver Name'}</h4>
-              <p className="text-gray-600 text-sm">{props.vehicleInfo || 'Uber Go • Affordable, Compact rides'}</p>
-
-              <div className="mt-3 text-sm text-gray-700 space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-500">Phone</span>
-                  <span className="font-medium">{props.driverNumber || 'N/A'}</span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-500">Vehicle</span>
-                  <span className="font-medium">{props.driverPlate || props.vehiclePlate || 'Plate N/A'}</span>
-                </div>
-              </div>
-            </div>
+      <div className="w-full bg-white max-w-md mx-auto rounded-xl shadow-md p-4">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center justify-start gap-3">
+            <img
+              className="h-10 w-10 rounded-full object-cover"
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80"
+              alt="Driver"
+            />
+            <div className="text-gray-900 font-medium">Name</div>
           </div>
-
-          <div className="bg-white rounded-lg border border-gray-200 p-3 space-y-3">
-            <div className="flex items-start gap-3">
-              <i className="ri-map-pin-user-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-              <div>
-                <p className="text-xs text-gray-500">Current Location</p>
-                <p className="text-sm font-medium text-gray-900">{props.currentLocation || props.pickup || 'Location not set'}</p>
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200" />
-
-            <div className="flex items-start gap-3">
-              <i className="ri-map-pin-2-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-              <div>
-                <p className="text-xs text-gray-500">Destination</p>
-                <p className="text-sm font-medium text-gray-900">{props.destination || 'Destination not set'}</p>
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200" />
-
-            <div className="flex items-start gap-3">
-              <i className="ri-money-rupee-circle-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-              <div>
-                <p className="text-xs text-gray-500">Amount</p>
-                <p className="text-sm font-medium text-gray-900">{props.fare || props.price || '₹192'}</p>
-              </div>
-            </div>
+          <div className="text-right">
+            <div className="text-xs text-gray-500">Total income today</div>
+            <div className="text-gray-900 font-semibold">$0.00</div>
           </div>
         </div>
+     <div className='bg-amber-300 h-auto rounded-2xl p-4 mt-4'>
+       <div className='text-2xl font-bold text-gray-900 mb-4'>
+         {new Date().toLocaleTimeString()}
+       </div>
+       <div className='grid grid-cols-2 gap-4'>
+         <div className='bg-white rounded-lg p-3'>
+           <div className='text-xs text-gray-500 mb-1'>Total Online Hours</div>
+           <div className='text-lg font-semibold text-gray-900'>8.5 hrs</div>
+         </div>
+         <div className='bg-white rounded-lg p-3'>
+           <div className='text-xs text-gray-500 mb-1'>Total Distance</div>
+           <div className='text-lg font-semibold text-gray-900'>45.2 km</div>
+         </div>
+       </div>
+     </div>
       </div>
     </div>
   )
