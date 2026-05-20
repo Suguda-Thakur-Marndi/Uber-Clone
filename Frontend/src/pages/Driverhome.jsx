@@ -1,9 +1,9 @@
 import gsap from 'gsap'
 import 'remixicon/fonts/remixicon.css'
 import React, { useRef, useState, useEffect } from 'react'
-import Ridepopup from '../componenets/Raidepopup'
+import Ridepopup from '../components/Ridepopup'
 
-const WaitingForDriver = (props) => {
+const WaitingForDriver = () => {
   const driverPanelCloseRef = useRef(null)
   const [driverPanel, setDriverPanel] = useState(false)
 
