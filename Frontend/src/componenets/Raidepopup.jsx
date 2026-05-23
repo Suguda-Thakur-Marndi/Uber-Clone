@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 
 const RidePopup = (props) => {
-  const [ridepopuppanel, setridepopuppanel] = useState(false)
-  
+  if (!props.ridepopupPanel) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm">
+    <div ref={props.ridepopupCloseRef} onClick={() => props.setRidePopupPanel(false)} className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm">
       <div className="w-full rounded-t-3xl bg-white p-5 shadow-2xl ring-1 ring-black/5">
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-gray-200" />
 
@@ -65,18 +64,14 @@ const RidePopup = (props) => {
 
         <div className="mt-5 grid grid-cols-2 gap-3">
           <button 
-            onClick={() => {
-              props.onIgnoreRide?.()
-            }}
+            onClick={() => props.setRidePopupPanel(false)}
             type="button"
             className="w-full rounded-2xl border border-gray-300 bg-white py-3 font-semibold text-gray-700 transition hover:bg-gray-50 active:scale-95"
           >
             Ignore
           </button>
           <button 
-            onClick={() => {
-              props.onConfirmRide?.()
-            }}
+          
             type="button"
             className="w-full rounded-2xl bg-black py-3 font-semibold text-white transition hover:bg-gray-800 active:scale-95"
           >

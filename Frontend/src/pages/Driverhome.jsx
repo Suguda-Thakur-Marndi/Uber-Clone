@@ -7,6 +7,17 @@ import Captaintaindetails from '../componenets/Driverdetails'
 const WaitingForDriver = () => {
   const driverPanelCloseRef = useRef(null)
   const [driverPanel, setDriverPanel] = useState(false)
+   const [ridepopupPanel, setRidepopupPanel] = useState(false)
+    const ridepopupCloseRef = useRef(null)
+
+    useEffect(() => {
+      if(ridepopupPanel){
+        gsap.to(ridepopupCloseRef.current, { transform: 'translateY(0)', duration: 0.5 })
+      }else{
+        gsap.to(ridepopupCloseRef.current, { transform: 'translateY(100%)', duration: 0.5 })
+      }
+    }, [ridepopupPanel])
+
 
   useEffect(() => {
    
@@ -25,7 +36,7 @@ const WaitingForDriver = () => {
     >
       <div className="fixed bottom-0 left-0 right-0 z-10  shadow-sm">
         <Captaintaindetails driverPanelCloseRef={driverPanelCloseRef} driverPanel={driverPanel} setDriverPanel={setDriverPanel} />
-        <Ridepopup />
+        <Ridepopup setRidePopupPanel={setRidepopupPanel} ridepopupPanel={ridepopupPanel} ridepopupCloseRef={ridepopupCloseRef} />
       </div>
     </div>
   )
