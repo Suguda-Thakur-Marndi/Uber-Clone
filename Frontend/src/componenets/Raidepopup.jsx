@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const RidePopup = (props) => {
   return (
-    <div ref={props.ridepopupCloseRef} onClick={() => props.setRidePopupPanel(false)} className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm">
+    <div ref={props.ridepopupCloseRef} onClick={() => props.setRidePopupPanel(false)} style={{ transform: 'translateY(0)' }} className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm">
       <div className="w-full rounded-t-3xl bg-white p-5 shadow-2xl ring-1 ring-black/5">
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-gray-200" />
 
