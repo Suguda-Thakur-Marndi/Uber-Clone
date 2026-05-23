@@ -8,15 +8,9 @@ const RidePopup = (props) => {
   const panelclose = useRef(null)
    useGSAP(() => {
     if(ridepopuppanel){
-      gsap.to(ridepopuppanelRef.current, { height:'80%' })
-      gsap.to(panelclose.current, {
-        opacity:1
-      })
+      gsap.to(ridepopuppanelRef.current, { transform: 'translateY(0)', duration: 0.5 })
     } else {
-      gsap.to(ridepopuppanelRef.current, { height:'0%' })
-      gsap.to(panelclose.current, {
-        opacity:0
-      })
+      gsap.to(ridepopuppanelRef.current, { transform: 'translateY(100%)', duration: 0.5 })
     }
   }, [ridepopuppanel])
 
