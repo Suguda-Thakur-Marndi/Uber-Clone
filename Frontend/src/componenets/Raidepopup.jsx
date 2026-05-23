@@ -1,21 +1,11 @@
-import React, { useState, useRef } from 'react'
-import useGSAP from '../hooks/useGSAP'
-import gsap from 'gsap'
+import React, { useState } from 'react'
 
 const RidePopup = (props) => {
   const [ridepopuppanel, setridepopuppanel] = useState(false)
-  const ridepopuppanelRef = useRef(null)
-  const panelclose = useRef(null)
-   useGSAP(() => {
-    if(ridepopuppanel){
-      gsap.to(ridepopuppanelRef.current, { transform: 'translateY(0)', duration: 0.5 })
-    } else {
-      gsap.to(ridepopuppanelRef.current, { transform: 'translateY(100%)', duration: 0.5 })
-    }
-  }, [ridepopuppanel])
+  
 
   return (
-    <div ref={ridepopuppanelRef} className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm">
       <div className="w-full rounded-t-3xl bg-white p-5 shadow-2xl ring-1 ring-black/5">
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-gray-200" />
 
