@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const RidePopup = (props) => {
+  const [ridepopuppanel, setridepopuppanel] = useState(false)
+
   return (
     <div className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm">
       <div className="w-full rounded-t-3xl bg-white p-5 shadow-2xl ring-1 ring-black/5">
