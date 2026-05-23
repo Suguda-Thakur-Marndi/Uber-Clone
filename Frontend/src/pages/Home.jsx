@@ -18,7 +18,7 @@ const Home = () => {
   const [waitingfordriver, setwaitingfordriver] = useState(false)
   const [vichelpanel, setvichelpanel] = useState(false)
   const [confirmRideOpen, setConfirmRideOpen] = useState(false)
-  const [VichelFound, setVichelFound] = useState(false)
+  
   
   useGSAP(() => {
     if(panel){
