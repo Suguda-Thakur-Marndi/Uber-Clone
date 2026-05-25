@@ -2,11 +2,15 @@ import gsap from 'gsap'
 import 'remixicon/fonts/remixicon.css'
 import React, { useRef, useState, useEffect } from 'react'
 import Ridepopup from '../componenets/Raidepopup'
+import Conformridepanel from '../componenets/Conformridepanel'
 import Captaintaindetails from '../componenets/Driverdetails'
 
 const WaitingForDriver = () => {
   const driverPanelCloseRef = useRef(null)
   const [driverPanel, setDriverPanel] = useState(false)
+  const ConformridepanelRef = useRef(null)
+  const [showConformridepanel, setConformridepanel] = useState(false)
+
 
   useEffect(() => {
    
@@ -17,6 +21,15 @@ const WaitingForDriver = () => {
       gsap.to(driverPanelCloseRef.current, { transform: 'translateY(80%)', duration: 0.5 })
     }
   }, [driverPanel])
+    useEffect(() => {
+   
+    if (!ConformridepanelRef.current) return
+    if (showConformridepanel) {
+      gsap.to(ConformridepanelRef.current, { transform: 'translateY(0)', duration: 0.5 })
+    } else {
+      gsap.to(ConformridepanelRef.current, { transform: 'translateY(80%)', duration: 0.5 })
+    }
+  }, [showConformridepanel])
 
   return (
     <div
@@ -25,7 +38,12 @@ const WaitingForDriver = () => {
     >
       <div className="fixed bottom-0 left-0 right-0 z-10  shadow-sm">
         <Captaintaindetails driverPanelCloseRef={driverPanelCloseRef} driverPanel={driverPanel} setDriverPanel={setDriverPanel} />
-        <Ridepopup />
+        <div>
+        <Ridepopup setConformridepanel={setConformridepanel} />
+        </div>
+        <div ref={ConformridepanelRef}>
+        <Conformridepanel setConformridepanel={setConformridepanel} />
+        </div>
       </div>
     </div>
   )

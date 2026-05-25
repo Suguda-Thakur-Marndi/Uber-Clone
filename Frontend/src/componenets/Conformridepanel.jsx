@@ -1,51 +1,27 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { useGSAP } from "@gsap/react"
+import { useRef } from 'react'
 import gsap from "gsap"
 
-const RidePopup = ({ setConformridepanel }) => {
-
-  const [ridepopuppanel, setConfirmRideOpen] = useState(true)
-
+const Conformridepanel = ({ setConformridepanel }) => {
   const panelRef = useRef(null)
   const panelclose = useRef(null)
   
-
   useGSAP(() => {
+    gsap.to(panelRef.current, {
+      height: '55%',
+      duration: 0.5
+    })
 
-    if (ridepopuppanel) {
-
-      gsap.to(panelRef.current, {
-        height: '55%',
-        duration: 0.5
-      })
-
-      gsap.to(panelclose.current, {
-        opacity: 1,
-        duration: 0.3
-      })
-
-    }
-
-    else {
-
-      gsap.to(panelRef.current, {
-        height: '0%',
-        duration: 0.5
-      })
-
-      gsap.to(panelclose.current, {
-        opacity: 0,
-        duration: 0.3
-      })
-
-    }
-
-  }, [ridepopuppanel])
-
+    gsap.to(panelclose.current, {
+      opacity: 1,
+      duration: 0.3
+    })
+  }, [])
   return (
-<div>
+    <div>
     <div
-      ref={panelRef} onClick={() => setConfirmRideOpen(false)}
+      ref={panelRef} onClick={() => setConformridepanel(false)}
       className="fixed bottom-0 z-50 w-full overflow-hidden rounded-t-3xl bg-white shadow-2xl"
       style={{ height: "55%" }}
     >
@@ -164,7 +140,7 @@ const RidePopup = ({ setConformridepanel }) => {
         <div className="mt-5 grid grid-cols-2 gap-3">
 
           <button
-            onClick={() => setConfirmRideOpen(false)}
+            onClick={() => setConformridepanel(false)}
             type="button"
             className="w-full rounded-2xl border border-gray-300 bg-white py-3 font-semibold text-gray-700"
           >
@@ -172,14 +148,10 @@ const RidePopup = ({ setConformridepanel }) => {
           </button>
 
           <button
-            onClick={() => {
-              setConfirmRideOpen(false)
-              setConformridepanel(true)
-            }}
             type="button"
             className="w-full rounded-2xl bg-black py-3 font-semibold text-white"
           >
-           Accept
+            Confirm
           </button>
 
         </div>
@@ -191,4 +163,4 @@ const RidePopup = ({ setConformridepanel }) => {
   )
 }
 
-export default RidePopup
+export default Conformridepanel
