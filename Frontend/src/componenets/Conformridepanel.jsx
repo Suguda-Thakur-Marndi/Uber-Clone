@@ -37,7 +37,7 @@ const Conformridepanel = ({ setConformridepanel }) => {
     <div
       ref={panelRef} onClick={() => setIsOpen(false)}
       className="fixed bottom-0 z-50 w-full overflow-hidden rounded-t-3xl bg-white shadow-2xl"
-      style={{ height: "55%" }}
+      style={{ height: "0%" }}
     >
 
       <div className="p-5">
