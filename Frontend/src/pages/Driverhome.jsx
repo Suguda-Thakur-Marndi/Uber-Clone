@@ -14,7 +14,7 @@ const WaitingForDriver = () => {
     if (driverPanel) {
       gsap.to(driverPanelCloseRef.current, { transform: 'translateY(0)', duration: 0.5 })
     } else {
-      gsap.to(driverPanelCloseRef.current, { transform: 'translateY(90%)', duration: 0.5 })
+      gsap.to(driverPanelCloseRef.current, { transform: 'translateY(80%)', duration: 0.5 })
     }
   }, [driverPanel])
 
