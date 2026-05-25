@@ -1,13 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRef } from 'react'
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 
 const Conformridepanel = ({ setConformridepanel }) => {
+  const [isOpen, setIsOpen] = useState(true)
   const panelRef = useRef(null)
   const panelclose = useRef(null)
+
+  useGSAP(() => {
+    if (isOpen) {
+      gsap.to(panelRef.current, {
+        height: '55%',
+        duration: 0.5
+      })
+      gsap.to(panelclose.current, {
+        opacity: 1,
+        duration: 0.3
+      })
+    } else {
+      gsap.to(panelRef.current, {
+        height: '0%',
+        duration: 0.5
+      })
+      gsap.to(panelclose.current, {
+        opacity: 0,
+        duration: 0.3
+      })
+      setTimeout(() => {
+        setConformridepanel(false)
+      }, 500)
+    }
+  }, [isOpen])
   return (
     <div>
     <div
-      ref={panelRef} onClick={() => setConformridepanel(false)}
+      ref={panelRef} onClick={() => setIsOpen(false)}
       className="fixed bottom-0 z-50 w-full overflow-hidden rounded-t-3xl bg-white shadow-2xl"
       style={{ height: "55%" }}
     >
@@ -126,7 +154,7 @@ const Conformridepanel = ({ setConformridepanel }) => {
         <div className="mt-5 grid grid-cols-2 gap-3">
 
           <button
-            onClick={() => setConformridepanel(false)}
+            onClick={() => setIsOpen(false)}
             type="button"
             className="w-full rounded-2xl border border-gray-300 bg-white py-3 font-semibold text-gray-700"
           >
@@ -134,6 +162,7 @@ const Conformridepanel = ({ setConformridepanel }) => {
           </button>
 
           <button
+            onClick={() => setIsOpen(false)}
             type="button"
             className="w-full rounded-2xl bg-black py-3 font-semibold text-white"
           >

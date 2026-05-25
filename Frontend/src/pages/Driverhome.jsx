@@ -8,7 +8,6 @@ import Captaintaindetails from '../componenets/Driverdetails'
 const WaitingForDriver = () => {
   const driverPanelCloseRef = useRef(null)
   const [driverPanel, setDriverPanel] = useState(false)
-  const ConformridepanelRef = useRef(null)
   const [showConformridepanel, setConformridepanel] = useState(false)
 
 
@@ -21,15 +20,6 @@ const WaitingForDriver = () => {
       gsap.to(driverPanelCloseRef.current, { transform: 'translateY(80%)', duration: 0.5 })
     }
   }, [driverPanel])
-    useEffect(() => {
-   
-    if (!ConformridepanelRef.current) return
-    if (showConformridepanel) {
-      gsap.to(ConformridepanelRef.current, { transform: 'translateY(0)', duration: 0.5 })
-    } else {
-      gsap.to(ConformridepanelRef.current, { transform: 'translateY(80%)', duration: 0.5 })
-    }
-  }, [showConformridepanel])
 
   return (
     <div
@@ -41,9 +31,7 @@ const WaitingForDriver = () => {
         <div>
         <Ridepopup setConformridepanel={setConformridepanel} />
         </div>
-        <div ref={ConformridepanelRef} style={{ transform: 'translateY(80%)' }}>
         {showConformridepanel && <Conformridepanel setConformridepanel={setConformridepanel} />}
-        </div>
       </div>
     </div>
   )
