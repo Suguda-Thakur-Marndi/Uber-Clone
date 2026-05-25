@@ -41,8 +41,8 @@ const WaitingForDriver = () => {
         <div>
         <Ridepopup setConformridepanel={setConformridepanel} />
         </div>
-        <div ref={ConformridepanelRef}>
-        <Conformridepanel setConformridepanel={setConformridepanel} />
+        <div ref={ConformridepanelRef} style={{ transform: 'translateY(80%)' }}>
+        {showConformridepanel && <Conformridepanel setConformridepanel={setConformridepanel} />}
         </div>
       </div>
     </div>

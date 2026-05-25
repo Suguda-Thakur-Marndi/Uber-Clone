@@ -1,23 +1,9 @@
 import React from 'react'
-import { useGSAP } from "@gsap/react"
 import { useRef } from 'react'
-import gsap from "gsap"
 
 const Conformridepanel = ({ setConformridepanel }) => {
   const panelRef = useRef(null)
   const panelclose = useRef(null)
-  
-  useGSAP(() => {
-    gsap.to(panelRef.current, {
-      height: '55%',
-      duration: 0.5
-    })
-
-    gsap.to(panelclose.current, {
-      opacity: 1,
-      duration: 0.3
-    })
-  }, [])
   return (
     <div>
     <div
