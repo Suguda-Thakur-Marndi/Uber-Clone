@@ -38,7 +38,7 @@ const Conformridepanel = ({ setConformridepanel }) => {
       style={{ height: "0%" }}
     >
 
-      <div className="p-5">
+      <div className="p-3">
 
         <div
           ref={panelclose}
