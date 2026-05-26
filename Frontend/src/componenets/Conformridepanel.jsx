@@ -6,7 +6,7 @@ const Conformridepanel = ({ setConformridepanel }) => {
   const panelRef = useRef(null)
   const panelclose = useRef(null)
 
-  // sample booking user data (replace with props as needed)
+ 
   const bookingUser = {
     name: 'Rahul Sharma',
     phone: '+91 98765 43210',
