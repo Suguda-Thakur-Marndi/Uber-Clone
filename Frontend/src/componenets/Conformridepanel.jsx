@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import { useRef } from 'react'
-import { useGSAP } from "@gsap/react"
+import React, { useState, useRef, useEffect } from 'react'
 import gsap from "gsap"
 
 const Conformridepanel = ({ setConformridepanel }) => {
@@ -8,30 +6,30 @@ const Conformridepanel = ({ setConformridepanel }) => {
   const panelRef = useRef(null)
   const panelclose = useRef(null)
 
-  useGSAP(() => {
+  // sample booking user data (replace with props as needed)
+  const bookingUser = {
+    name: 'Rahul Sharma',
+    phone: '+91 98765 43210',
+    rating: 4.8,
+    pickup: 'KIIT Square, Bhubaneswar',
+    dropoff: 'Railway Station',
+    amount: '₹192',
+    distance: '2 km',
+    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=48&h=48&fit=crop'
+  }
+
+  useEffect(() => {
+    if (!panelRef.current || !panelclose.current) return
     if (isOpen) {
-      gsap.to(panelRef.current, {
-        height: '55%',
-        duration: 0.5
-      })
-      gsap.to(panelclose.current, {
-        opacity: 1,
-        duration: 0.3
-      })
+      gsap.to(panelRef.current, { height: '55%', duration: 0.5 })
+      gsap.to(panelclose.current, { opacity: 1, duration: 0.3 })
     } else {
-      gsap.to(panelRef.current, {
-        height: '0%',
-        duration: 0.5
-      })
-      gsap.to(panelclose.current, {
-        opacity: 0,
-        duration: 0.3
-      })
-      setTimeout(() => {
-        setConformridepanel(false)
-      }, 500)
+      gsap.to(panelRef.current, { height: '0%', duration: 0.5 })
+      gsap.to(panelclose.current, { opacity: 0, duration: 0.3 })
+      const t = setTimeout(() => setConformridepanel(false), 500)
+      return () => clearTimeout(t)
     }
-  }, [isOpen])
+  }, [isOpen, setConformridepanel])
   return (
     <div>
     <div
@@ -70,21 +68,24 @@ const Conformridepanel = ({ setConformridepanel }) => {
         <div className="mt-5 flex items-center gap-4 rounded-2xl bg-gray-50 p-4">
 
           <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=48&h=48&fit=crop"
+            src={bookingUser.avatar}
             alt="Customer"
             className="h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-sm"
           />
 
           <div className="min-w-0 flex-1">
 
-            <p className="text-sm text-gray-500">
-              Customer
-            </p>
+            <p className="text-sm text-gray-500">Customer</p>
 
-            <p className="truncate text-lg font-semibold text-gray-900">
-              Rahul Sharma
-            </p>
+            <p className="truncate text-lg font-semibold text-gray-900">{bookingUser.name}</p>
 
+            <p className="text-sm text-gray-500">{bookingUser.phone} • ⭐ {bookingUser.rating}</p>
+
+          </div>
+
+          <div className="text-right">
+            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600">{bookingUser.distance}</p>
+            <p className="text-sm font-semibold text-gray-900">{bookingUser.amount}</p>
           </div>
 
         </div>
