@@ -154,13 +154,13 @@ const Conformridepanel = ({ setConformridepanel }) => {
 
         <div className="mt-5 grid grid-cols-2 gap-3">
 
-          <button
+          <Link
             onClick={() => setIsOpen(false)}
             type="button"
-            className="w-full rounded-2xl border border-gray-300 bg-white py-3 font-semibold text-gray-700"
+            className="w-full rounded-2xl border border-gray-300 bg-red-500 py-3 font-bold text-white"
           >
-            Ignore
-          </button>
+            Cancel
+          </Link>
 
           <button
             onClick={() => setIsOpen(false)}
