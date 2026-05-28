@@ -1,9 +1,13 @@
 import React from 'react'
 
-const Captainride = () => {
+const CaptainRide = () => {
   return (
-    <div>Captainride</div>
+    <div>
+        <div className="p-5 space-y-4 bottom-0">
+            captain
+        </div>
+    </div>
   )
 }
 
-export default Captainride
+export default CaptainRide
