@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import gsap from "gsap"
+import { Link } from 'react-router-dom'
 
 const Conformridepanel = ({ setConformridepanel }) => {
   const [isOpen, setIsOpen] = useState(true)
@@ -154,21 +155,21 @@ const Conformridepanel = ({ setConformridepanel }) => {
 
         <div className="mt-5 grid grid-cols-2 gap-3">
 
-          <Link
+          <button
+            to="/Captainride"
             onClick={() => setIsOpen(false)}
-            type="button"
-            className="w-full rounded-2xl border border-gray-300 bg-red-500 py-3 font-bold text-white"
+            className="w-full rounded-2xl border border-gray-300 bg-red-500 py-3 font-bold text-white text-center block"
           >
             Cancel
-          </Link>
+          </button>
 
-          <button
+          <Link 
+            to="/Captainride"
             onClick={() => setIsOpen(false)}
-            type="button"
-            className="w-full rounded-2xl bg-black py-3 font-semibold text-white"
+            className="w-full rounded-2xl bg-black py-3 font-semibold text-white text-center block"
           >
             Confirm
-          </button>
+          </Link>
 
         </div>
 

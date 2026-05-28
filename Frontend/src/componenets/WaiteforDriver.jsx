@@ -20,7 +20,7 @@ const WaiteforDriver = (props) => {
         <div className="bg-gray-50 rounded-lg p-4 space-y-3">
           <div className="flex items-start gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
            
-            <div className="w-24 flex-shrink-0">
+            <div className="w-24 shrink-0">
               <img
                 src={props.driverPhoto || 'https://placeholder.co/96x96'}
                 alt="Driver"
