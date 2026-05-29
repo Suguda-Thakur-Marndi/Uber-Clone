@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react'
 import Finishride from '../componenets/Finishride'
-import { Link } from 'react-router-dom'
 import 'remixicon/fonts/remixicon.css'
 import { useGSAP } from "@gsap/react"
 import gsap from 'gsap'
+import { Link } from 'react-router-dom'
 
 
 const CaptainRide = () => {
@@ -13,10 +13,10 @@ const CaptainRide = () => {
 
   useGSAP(() => {
     if(finishRide){
-      gsap.to(finalpanelRef.current, { height:'28%' })
+      gsap.to(finalpanelRef.current, { height:'28%', duration: 0.3, ease: 'power2.inOut' })
       
     } else {
-      gsap.to(finalpanelRef.current, { height:'5%' })
+      gsap.to(finalpanelRef.current, { height:'5%', duration: 0.3, ease: 'power2.inOut' })
       
     }
   }, [finishRide])
@@ -46,8 +46,8 @@ const CaptainRide = () => {
 
       <div ref={finalpanelRef} className="fixed bottom-0 left-0 right-0 z-10 rounded-t-2xl border-t border-gray-200 bg-white text-gray-900 shadow-2xl overflow-hidden">
         <div className="mx-auto w-full max-w-3xl px-5 py-4">
-          <div onClick={() => setFinishRide(!finishRide)} className="flex items-center justify-center cursor-pointer">
-            <i className="ri-arrow-down-s-line text-3xl"></i>
+          <div onClick={() => setFinishRide(!finishRide)} className="flex items-center justify-center cursor-pointer transition-transform">
+            <i className={`ri-arrow-${finishRide ? 'down' : 'up'}-s-line text-3xl`}></i>
           </div>
           {finishRide && (
             <>
@@ -56,7 +56,7 @@ const CaptainRide = () => {
                   <p className="text-xs font-medium uppercase tracking-wide text-gray-500">Distance</p>
                   <h4 className="text-lg font-bold">4 KM away</h4>
                 </div>
-                <button className="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 active:scale-[0.99]">
+                <button className="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-800 active:scale-[0.99]">
                   <i className="ri-navigation-line text-base"></i>
                   Navigate
                 </button>
@@ -69,12 +69,12 @@ const CaptainRide = () => {
                 </div>
               </div>
 
-              <button
-               
-                className="mt-4 w-full rounded-lg bg-green-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-green-700 active:scale-[0.99]"
+              <Link
+                to="/finishride"
+                className="mt-4 w-full flex items-center justify-center rounded-lg bg-green-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-green-500 active:scale-[0.98]"
               >
                 Complete Ride                
-              </button>
+              </Link>
             </>
           )}
         </div>
