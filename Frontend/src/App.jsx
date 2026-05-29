@@ -20,6 +20,7 @@ const App = () => {
         <Route path='/login' element={<UserLogin />} />
         <Route path='/driver-sign' element={<DriverSign />} />
         <Route path='/driver-signup' element={<DriverSignup />} />
+        <Route path='/Captainride' element={<Captainride />} />
         <Route
           path='/Home'
           element={
