@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import Finishride from '../componenets/Finishride'
 import { Link } from 'react-router-dom'
 import 'remixicon/fonts/remixicon.css'
+import { useGSAP } from "@gsap/react"
+import gsap from 'gsap'
 
 
 const CaptainRide = () => {
+  const [finishRide, setFinishRide] = useState(false)
+  const finalpanelRef = useRef(null)
+ 
+
+  useGSAP(() => {
+    if(finishRide){
+      gsap.to(finalpanelRef.current, { height:'80%' })
+      
+    } else {
+      gsap.to(finalpanelRef.current, { height:'0%' })
+      
+    }
+  }, [finishRide])
   return (
     <div className="relative min-h-screen bg-gray-900 text-white">
       <div
