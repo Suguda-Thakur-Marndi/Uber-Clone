@@ -10,6 +10,7 @@ import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import DriverHome from './pages/Driverhome'
 import DriverProtected from './pages/DriverProtected'
 import Captainride from './pages/Driverride'
+import Finishride from './componenets/Finishride'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/driver-sign' element={<DriverSign />} />
         <Route path='/driver-signup' element={<DriverSignup />} />
         <Route path='/Captainride' element={<Captainride />} />
+        <Route path='/finishride' element={<Finishride />} />
         <Route
           path='/Home'
           element={
