@@ -9,7 +9,7 @@ import UserLogout from './pages/UserLogout'
 import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import DriverHome from './pages/Driverhome'
 import DriverProtected from './pages/DriverProtected'
-import Captainride from './pages/Captainride'
+import Captainride from './pages/Driverride'
 
 const App = () => {
   return (
