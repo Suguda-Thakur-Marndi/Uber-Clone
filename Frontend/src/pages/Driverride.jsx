@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 
 const CaptainRide = () => {
-  const [finishRide, setFinishRide] = useState(false)
+  const [finishRide, setFinishRide] = useState(true)
   const finalpanelRef = useRef(null)
  
 
