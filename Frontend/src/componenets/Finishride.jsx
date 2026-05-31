@@ -22,6 +22,7 @@ const FinishRide = () => {
             In progress
           </span>
         </div>
+        D
 
         <div className="mb-4 rounded-2xl border border-gray-200 bg-linear-to-br from-gray-50 to-gray-100 p-4 shadow-sm">
           <div className="flex items-center gap-3">
