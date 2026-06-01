@@ -23,7 +23,7 @@ const Home = () => {
   
   useGSAP(() => {
     if(panel){
-      gsap.to(panelRef.current, { height:'80%' })
+      gsap.to(panelRef.current, { height:'90%' })
     } else {
       gsap.to(panelRef.current, { height:'0%' })
     }
