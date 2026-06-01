@@ -105,10 +105,10 @@ const Home = () => {
             onClick={()=>
               setPanel(false)
             }
-            className="flex items-center justify-center text-gray-500 hover:text-gray-900 transition mb-2"
+            className="text-gray-500 hover:text-gray-900 transition mb-2"
             aria-label="Close panel"
           >
-          <i className="ri-arrow-down-s-line text-2xl leading-none" aria-hidden="true"></i>
+          <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
           </button>
           <h4 className="text-3xl font-bold mb-4 text-gray-900">
             Find Trip
@@ -146,7 +146,6 @@ const Home = () => {
        
 
         </div>
-        
       </div>
       <div>
       <Vichelpanel setvichelpanel={setvichelpanel} vichelpanelref={vichelpanelref} prop={{ conformrideref: setConfirmRideOpen }}/>
