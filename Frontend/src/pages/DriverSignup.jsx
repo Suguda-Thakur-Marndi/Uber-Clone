@@ -84,12 +84,12 @@ const DriverSignup = () => {
           }} className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full" placeholder="Enter Your Last Name" />
 
           <h3 className="mb-2 text-xl">What's your email</h3>
-          <input className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full" required type="email" value={email} onChange={(e) => {
+          <input className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full" autoComplete="username" required type="email" value={email} onChange={(e) => {
             setEmail(e.target.value)
           }} placeholder="Your email" />
 
           <h3 className="mb-2 text-xl">Enter Your Password</h3>
-          <input className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full" required type="password" value={password} onChange={(e) => {
+          <input className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full" autoComplete="new-password" required type="password" value={password} onChange={(e) => {
             setPassword(e.target.value)
           }} placeholder="Enter Password" />
 

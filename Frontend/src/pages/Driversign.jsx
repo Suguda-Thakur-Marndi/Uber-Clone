@@ -50,6 +50,7 @@ const DriverSign = () => {
             </h3>
             <input
               className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full"
+              autoComplete="username"
               required
               value={email}
               onChange={(e) => {
@@ -63,6 +64,7 @@ const DriverSign = () => {
             </h3>
             <input
               className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full"
+              autoComplete="username"
               value={vehicleNumberPlate}
               onChange={(e) => setVehicleNumberPlate(e.target.value)}
               required
@@ -78,6 +80,7 @@ const DriverSign = () => {
             </h3>
             <input
               className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value)
