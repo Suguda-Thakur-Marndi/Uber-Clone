@@ -129,9 +129,7 @@ const Home = () => {
             </div>
             
             <div className="relative">
-              <div className="absolute left-3 top-3.5 text-red-500 text-lg flex items-center">
-                <i className="ri-map-pin-fill"></i>
-              </div>
+             
               <input
                 onClick={()=>{
                   setPanel(true)
