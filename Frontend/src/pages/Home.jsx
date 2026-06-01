@@ -24,14 +24,8 @@ const Home = () => {
   useGSAP(() => {
     if(panel){
       gsap.to(panelRef.current, { height:'80%' })
-      gsap.to(panelclose.current, {
-        opacity:1
-      })
     } else {
       gsap.to(panelRef.current, { height:'0%' })
-      gsap.to(panelclose.current, {
-        opacity:0
-      })
     }
   }, [panel])
   useGSAP(()=>{
@@ -102,13 +96,11 @@ const Home = () => {
           <button
             type="button"
             ref={panelclose}
-            onClick={()=>
-              setPanel(false)
-            }
-            className="text-gray-500 hover:text-gray-900 transition mb-2"
+            onClick={() => setPanel(false)}
+            className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:border-gray-300 hover:text-gray-900"
             aria-label="Close panel"
           >
-          <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
+            <i className="ri-arrow-down-s-line text-2xl leading-none" aria-hidden="true"></i>
           </button>
           <h4 className="text-3xl font-bold mb-4 text-gray-900">
             Find Trip
