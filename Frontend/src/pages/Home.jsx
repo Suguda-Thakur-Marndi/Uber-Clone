@@ -92,15 +92,19 @@ const Home = () => {
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
                 <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" />                
                 <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" />
-        <div className="h-[20%] pb-6 px-6 w-full bg-white">
+        <div className="h-[80%] pb-6 px-6 w-full bg-white">
           <button
             type="button"
             ref={panelclose}
-            onClick={() => setPanel(false)}
+            onClick={() => setPanel(!panel)}
             className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:border-gray-300 hover:text-gray-900"
-            aria-label="Close panel"
+            aria-label={panel ? 'Close panel' : 'Open panel'}
+            aria-expanded={panel}
           >
-            <i useRef={panelclose} className="ri-arrow-down-s-line text-2xl leading-none" aria-hidden="true"></i>
+            <i
+              className={`ri-arrow-down-s-line text-2xl leading-none transform transition-transform duration-200 ${panel ? 'rotate-180' : ''}`}
+              aria-hidden="true"
+            ></i>
           </button>
           <h4 className="text-3xl font-bold mb-4 text-gray-900">
             Find Trip
