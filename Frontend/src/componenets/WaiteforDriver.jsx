@@ -4,7 +4,8 @@ const WaiteforDriver = (props) => {
   
   return (
     <div>
-   <div className="p-5 space-y-4">
+   <div className="p-4 py-3.5 space-y-4">
+    <div>
         <button 
           type="button"
           onClick={()=>{
@@ -15,12 +16,13 @@ const WaiteforDriver = (props) => {
         >
          <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
         </button>
+</div>
         <div className="bg-gray-50 rounded-lg p-4 space-y-3">
           <div className="flex items-start gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
            
             <div className="w-24 shrink-0">
               <img
-                src={props.driverPhoto || 'https://placeholder.co/96x96'}
+                src={props.driverPhoto || 'https://via.placeholder.com/96'}
                 alt="Driver"
                 className="w-24 h-24 rounded-full object-cover"
               />

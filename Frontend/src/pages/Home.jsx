@@ -139,8 +139,7 @@ const Home = () => {
         </div>
         <div ref={panelRef} className="bg-white h-[80%] p-5 w-full">
           <Locationpanel vichelpanel={vichelpanel} setvichelpanel={setvichelpanel} setPanel={setPanel}/>
-       
-
+      
         </div>
       </div>
       <div>
@@ -159,11 +158,10 @@ const Home = () => {
         <LookingforDriver onClose={() => setVichelFound(false)} />
       </div>
       <div ref={waitingfordriverref} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-14">
-        <WaiteforDriver/>
+      <WaiteforDriver/>  
       </div>
       
-      
-    </div>
+ </div>
   )
 }
   
