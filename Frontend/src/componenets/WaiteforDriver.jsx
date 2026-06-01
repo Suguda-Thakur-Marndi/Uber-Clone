@@ -3,6 +3,7 @@ import React from 'react'
 const WaiteforDriver = (props) => {
   
   return (
+    <div>
    <div className="p-5 space-y-4">
         <button 
           type="button"
@@ -14,9 +15,6 @@ const WaiteforDriver = (props) => {
         >
          <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
         </button>
-        
-      
-        
         <div className="bg-gray-50 rounded-lg p-4 space-y-3">
           <div className="flex items-start gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
            
@@ -80,6 +78,7 @@ const WaiteforDriver = (props) => {
         </div>
         
         
+    </div>
     </div>
   )
 }
