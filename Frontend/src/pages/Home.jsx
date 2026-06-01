@@ -100,7 +100,7 @@ const Home = () => {
             className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:border-gray-300 hover:text-gray-900"
             aria-label="Close panel"
           >
-            <i className="ri-arrow-down-s-line text-2xl leading-none" aria-hidden="true"></i>
+            <i useRef={panelclose} className="ri-arrow-down-s-line text-2xl leading-none" aria-hidden="true"></i>
           </button>
           <h4 className="text-3xl font-bold mb-4 text-gray-900">
             Find Trip
