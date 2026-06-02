@@ -114,7 +114,7 @@ const Home = () => {
               <div className="absolute left-3 top-3.5 text-green-600 text-lg flex items-center">
                 <i className="ri-map-pin-2-fill"></i>
               </div>
-              <input 
+              <input ></input>
                 onClick={()=>{
                   setPanel(true)
                 }}
