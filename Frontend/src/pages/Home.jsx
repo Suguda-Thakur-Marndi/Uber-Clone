@@ -106,7 +106,7 @@ const Home = () => {
               aria-hidden="true"
             ></i>
           </button>
-          <h4 className="text-3xl font-bold mb-4 text-gray-900">>
+          <h4 className="text-3xl font-bold mb-4 text-gray-900">
             Find Trip
           </h4>
           <form className="space-y-3 relative" onSubmit={handleSubmit}>
