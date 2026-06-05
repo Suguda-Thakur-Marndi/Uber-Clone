@@ -18,7 +18,7 @@ const DriverSignup = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
-
+;
     const driverData = {
       fullname: {
         firstname: firstName,
