@@ -97,7 +97,7 @@ const DriverSignup = () => {
           <input type="text" value={vehicleColour} onChange={(e) => {
             setVehicleColour(e.target.value)
           }} className="bg-[#eeee] mb-7 rounded px-4 py-2 border w-full" placeholder="e.g., Red, Blue, Black" required />
-
+.
           <h3 className="text-xl">Vehicle Capacity</h3>
           <input type="number" value={vehicleCapacity} onChange={(e) => {
             setVehicleCapacity(e.target.value)
