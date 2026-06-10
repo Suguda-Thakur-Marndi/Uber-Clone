@@ -65,7 +65,7 @@ const DriverSignup = () => {
     }
   }
 
-  return (]
+  return (
     <div>
       <div className="p-7">
         <form onSubmit={submitHandler}>
