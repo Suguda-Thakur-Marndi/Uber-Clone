@@ -29,6 +29,7 @@ const DriverProtected = ({ children }) => {
 
                 setDriver(response.data.driver)
             } catch (error) {
+                console.error(error)
                 localStorage.removeItem('token')
                 setDriver(null)
                 navigate('/driver-sign')

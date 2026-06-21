@@ -15,7 +15,7 @@ const Home = () => {
   const conformridepanel = useRef(null)
   const vichelfoundpanel = useRef(null)
   const waitingfordriverref = useRef(null)
-  const [waitingfordriver, setwaitingfordriver] = useState(false)
+  const [waitingfordriver] = useState(false)
   const [vichelpanel, setvichelpanel] = useState(false)
   const [confirmRideOpen, setConfirmRideOpen] = useState(false)
   const [VichelFound, setVichelFound] = useState(false)
@@ -88,10 +88,10 @@ const Home = () => {
       <div className="fixed top-0 left-0 right-0 z-10  shadow-sm">
         <img className="h-16 w-24 p-4" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber logo" />
       </div>
-      <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" /> 
+      <img className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1000&q=80" alt="" role="presentation" /> 
       <div className="flex flex-col justify-end absolute top-16 h-[calc(100vh-4rem)] w-full px-0 rounded-t-3xl shadow-lg">
-                <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" />                
-                <img className="w-full h-full object-cover" src="https://i.sstatic.net/gtiI7.gif" alt="" role="presentation" />
+                <img className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1000&q=80" alt="" role="presentation" />                
+                <img className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1000&q=80" alt="" role="presentation" />
         <div className="h-[80%] pb-6 px-6 w-full bg-white">
           <button
             type="button"

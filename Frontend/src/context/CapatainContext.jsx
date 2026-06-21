@@ -1,5 +1,6 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState } from 'react';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const CaptainDataContext = createContext();
 
 const CaptainContext = ({ children }) => {

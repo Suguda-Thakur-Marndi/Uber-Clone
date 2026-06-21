@@ -22,7 +22,7 @@ const WaiteforDriver = (props) => {
            
             <div className="w-24 shrink-0">
               <img
-                src={props.driverPhoto || 'https://via.placeholder.com/96'}
+                src={props.driverPhoto || 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=96&h=96&fit=crop'}
                 alt="Driver"
                 className="w-24 h-24 rounded-full object-cover"
               />
