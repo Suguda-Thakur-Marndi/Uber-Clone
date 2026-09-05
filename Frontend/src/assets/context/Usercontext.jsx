@@ -1,22 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useState } from 'react'
+import UserProvider, { UserDataContext } from '../../context/UserContext';
 
-export const UserDataContext=createContext()
-
-const Usercontext = ({ children }) => {
-  const [user, setUser] = useState({
-    email:'',
-    fullname:{
-        firstName:'',
-        lastName:''
-    }
-  })
-
-  return (
-    <UserDataContext.Provider value={{ user, setUser: setUser }}>
-      {children}
-    </UserDataContext.Provider>
-  )
-}
-
-export default Usercontext
+export { UserDataContext };
+export default UserProvider;

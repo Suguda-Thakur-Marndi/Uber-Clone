@@ -1,71 +1,100 @@
-import React from 'react'
+import React from 'react';
 
-const Confirmvichel = (props) => {
+const Confirmvichel = ({
+  pickup,
+  destination,
+  selectedVehicle,
+  onConfirmRide,
+  onClose,
+  isBooking
+}) => {
+  const vehicle = selectedVehicle || {
+    name: 'Uber Go',
+    price: '₹160',
+    img: 'https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png'
+  };
+
   return (
-    <div className="p-5 space-y-4">
-        <button 
+    <div className="p-5 max-w-lg mx-auto space-y-4">
+      <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+        <h3 className="text-xl font-bold text-gray-900">Confirm your Ride</h3>
+        <button
           type="button"
-          onClick={()=>{
-            props.onClose?.()
-          }}
-          className="text-gray-600 hover:text-gray-900 transition mb-2"
+          onClick={onClose}
+          className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition"
           aria-label="Close"
         >
-         <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
+          <i className="ri-close-line text-lg"></i>
         </button>
-        
-        <h3 className="text-2xl font-bold text-gray-900">Confirm your Ride</h3>
-        
-        <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-          <div className="flex items-center gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
-            <img className="h-24 w-24 object-cover rounded" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="Uber Go vehicle" /> 
-            <div className="flex-1">
-              <h4 className="font-bold text-lg">Uber Go</h4>
-              <p className="text-gray-600 text-sm">Affordable, Compact rides</p>
-             
-            </div>
+      </div>
+
+      <div className="flex items-center gap-4 bg-gray-50 rounded-2xl p-4 border border-gray-200">
+        <img src={vehicle.img} alt={vehicle.name} className="h-16 w-20 object-contain rounded" />
+        <div className="flex-1">
+          <h4 className="font-bold text-lg text-gray-900">{vehicle.name}</h4>
+          <p className="text-xs text-gray-500">Instant confirmation • Cash or UPI</p>
+        </div>
+        <div className="text-right">
+          <p className="text-xl font-extrabold text-gray-900">{vehicle.price}</p>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-4 space-y-3.5 shadow-xs">
+        <div className="flex items-start gap-3">
+          <div className="mt-1 h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+            <i className="ri-map-pin-user-fill text-sm"></i>
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">Pickup Location</p>
+            <p className="text-sm font-semibold text-gray-800 truncate">{pickup || 'Current Location'}</p>
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 space-y-3">
-          <div className="flex items-start gap-3">
-            <i className="ri-map-pin-user-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-            <div>
-              <p className="text-xs text-gray-500">Current Location</p>
-              <p className="text-sm font-medium text-gray-900">{props.currentLocation || props.pickup || 'Location not set'}</p>
-            </div>
+
+        <div className="border-t border-dashed border-gray-200"></div>
+
+        <div className="flex items-start gap-3">
+          <div className="mt-1 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+            <i className="ri-map-pin-2-fill text-sm"></i>
           </div>
-
-          <div className="border-t border-gray-200"></div>
-
-          <div className="flex items-start gap-3">
-            <i className="ri-map-pin-2-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-            <div>
-              <p className="text-xs text-gray-500">Destination</p>
-              <p className="text-sm font-medium text-gray-900">{props.destination || 'Destination not set'}</p>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-200"></div>
-
-          <div className="flex items-start gap-3">
-            <i className="ri-money-rupee-circle-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-            <div>
-              <p className="text-xs text-gray-500">Amount</p>
-              <p className="text-sm font-medium text-gray-900">{props.fare || props.price || '₹192'}</p>
-            </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">Destination</p>
+            <p className="text-sm font-semibold text-gray-800 truncate">{destination || 'Destination Point'}</p>
           </div>
         </div>
-        
-        <button onClick={()=>{
-          props.onConfirmRide?.()
-        }}
-          type="button"
-          className="w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition active:scale-95"
-        >
-          Confirm Ride
-        </button>
+
+        <div className="border-t border-dashed border-gray-200"></div>
+
+        <div className="flex items-start gap-3">
+          <div className="mt-1 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+            <i className="ri-wallet-3-fill text-sm"></i>
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">Payment</p>
+            <p className="text-sm font-semibold text-gray-800">Cash / UPI to Driver</p>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        disabled={isBooking}
+        onClick={onConfirmRide}
+        className="w-full bg-black hover:bg-gray-800 active:scale-[0.99] text-white font-bold py-3.5 px-4 rounded-xl transition duration-150 flex items-center justify-center gap-2 shadow-lg disabled:opacity-50"
+      >
+        {isBooking ? (
+          <>
+            <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            <span>Requesting Ride...</span>
+          </>
+        ) : (
+          <>
+            <span>Confirm & Request {vehicle.name}</span>
+            <i className="ri-arrow-right-line"></i>
+          </>
+        )}
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Confirmvichel
+export default Confirmvichel;

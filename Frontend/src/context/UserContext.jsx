@@ -1,26 +1,36 @@
-import React, { createContext, useState } from 'react'
+import { createContext, useState } from 'react';
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const UserDataContext = createContext()
+export const UserDataContext = createContext(null);
 
-
-const UserContext = ({ children }) => {
-
-    const [ user, setUser ] = useState({
-        email: '',
-        fullName: {
-            firstName: '',
-            lastName: ''
+const UserProvider = ({ children }) => {
+    const [user, setUser] = useState(() => {
+        try {
+            const stored = localStorage.getItem('user');
+            return stored ? JSON.parse(stored) : {
+                _id: '',
+                email: '',
+                fullname: { firstname: '', lastname: '' }
+            };
+        } catch {
+            return { _id: '', email: '', fullname: { firstname: '', lastname: '' } };
         }
-    })
+    });
+
+    const updateAndStoreUser = (userData) => {
+        setUser(userData);
+        if (userData) {
+            localStorage.setItem('user', JSON.stringify(userData));
+        } else {
+            localStorage.removeItem('user');
+        }
+    };
 
     return (
-        <div>
-            <UserDataContext.Provider value={{ user, setUser }}>
-                {children}
-            </UserDataContext.Provider>
-        </div>
-    )
-}
+        <UserDataContext.Provider value={{ user, setUser: updateAndStoreUser }}>
+            {children}
+        </UserDataContext.Provider>
+    );
+};
 
-export default UserContext
+export default UserProvider;

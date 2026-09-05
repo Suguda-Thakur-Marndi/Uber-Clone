@@ -1,194 +1,80 @@
-import React, { useRef, useState } from 'react'
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
+import React from 'react';
 
-const RidePopup = ({ setConformridepanel }) => {
+const Raidepopup = ({ ride, onAccept, onIgnore }) => {
+  if (!ride) return null;
 
-  const [ridepopuppanel, setConfirmRideOpen] = useState(true)
-
-  const panelRef = useRef(null)
-  const panelclose = useRef(null)
-  
-
-  useGSAP(() => {
-
-    if (ridepopuppanel) {
-
-      gsap.to(panelRef.current, {
-        height: '55%',
-        duration: 0.5
-      })
-
-      gsap.to(panelclose.current, {
-        opacity: 1,
-        duration: 0.3
-      })
-
-    }
-
-    else {
-
-      gsap.to(panelRef.current, {
-        height: '0%',
-        duration: 0.5
-      })
-
-      gsap.to(panelclose.current, {
-        opacity: 0,
-        duration: 0.3
-      })
-
-    }
-
-  }, [ridepopuppanel])
+  const user = ride.user || {};
+  const userName = user.fullname ? `${user.fullname.firstname} ${user.fullname.lastname || ''}`.trim() : 'Customer';
 
   return (
-<div>
-    <div
-      ref={panelRef} onClick={() => setConfirmRideOpen(false)}
-      className="fixed bottom-0 z-50 w-full overflow-hidden rounded-t-3xl bg-white shadow-2xl"
-      style={{ height: "55%" }}
-    >
-
-      <div className="p-5">
-
-        <div
-          ref={panelclose}
-          className="mx-auto mb-4 h-1.5 w-12 cursor-pointer rounded-full bg-gray-300"
-        />
-
-        <div className="flex items-start justify-between gap-4">
-
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pointer-events-auto">
+      <div className="bg-white rounded-3xl p-5 shadow-2xl border border-gray-100 max-w-md mx-auto space-y-4 animate-in fade-in slide-in-from-bottom duration-300">
+        <div className="flex items-center justify-between">
           <div>
-
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600">
-              New ride request
-            </p>
-
-            <h3 className="mt-1 text-2xl font-bold text-gray-900">
-              A new ride is available!
-            </h3>
-
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
+              New Ride Request
+            </span>
+            <h3 className="text-xl font-bold text-gray-900 mt-1">₹{ride.fare || 160}</h3>
           </div>
-
-          <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-            2 km away
+          <span className="text-xs bg-gray-100 font-semibold text-gray-700 px-3 py-1.5 rounded-full">
+            {ride.distance ? `${(ride.distance / 1000).toFixed(1)} km away` : 'Nearby'}
           </span>
-
         </div>
 
-        <div className="mt-5 flex items-center gap-4 rounded-2xl bg-gray-50 p-4">
-
+        {/* Customer snippet */}
+        <div className="flex items-center gap-3.5 bg-gray-50 p-3 rounded-2xl border border-gray-200">
           <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=48&h=48&fit=crop"
+            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=64&h=64&fit=crop"
             alt="Customer"
-            className="h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-sm"
+            className="h-12 w-12 rounded-full object-cover border"
           />
-
           <div className="min-w-0 flex-1">
-
-            <p className="text-sm text-gray-500">
-              Customer
-            </p>
-
-            <p className="truncate text-lg font-semibold text-gray-900">
-              Rahul Sharma
-            </p>
-
+            <h4 className="font-bold text-sm text-gray-900 truncate">{userName}</h4>
+            <p className="text-xs text-gray-500">⭐ 4.8 Rating • Cash / Online</p>
           </div>
-
         </div>
 
-        <div className="mt-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-
-          <div className="flex items-start gap-3">
-
-            <i className="ri-map-pin-user-fill mt-0.5 text-lg text-emerald-600"></i>
-
-            <div>
-
-              <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-                Current Location
-              </p>
-
-              <p className="mt-1 text-sm font-semibold text-gray-900">
-                KIIT Square, Bhubaneswar
-              </p>
-
+        {/* Trip details */}
+        <div className="space-y-3 bg-white p-3 rounded-2xl border border-gray-200 text-sm">
+          <div className="flex items-start gap-2.5">
+            <i className="ri-map-pin-user-fill text-emerald-600 mt-0.5"></i>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-semibold uppercase text-gray-400">Pickup</p>
+              <p className="text-xs font-medium text-gray-800 truncate">{ride.pickup}</p>
             </div>
-
           </div>
-
-          <div className="my-4 border-t border-dashed border-gray-200"></div>
-
-          <div className="flex items-start gap-3">
-
-            <i className="ri-map-pin-2-fill mt-0.5 text-lg text-red-500"></i>
-
-            <div>
-
-              <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-                Destination
-              </p>
-
-              <p className="mt-1 text-sm font-semibold text-gray-900">
-                Railway Station
-              </p>
-
+          <div className="border-t border-gray-100"></div>
+          <div className="flex items-start gap-2.5">
+            <i className="ri-map-pin-2-fill text-red-500 mt-0.5"></i>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-semibold uppercase text-gray-400">Drop-off</p>
+              <p className="text-xs font-medium text-gray-800 truncate">{ride.destination}</p>
             </div>
-
           </div>
-
-          <div className="my-4 border-t border-dashed border-gray-200"></div>
-
-          <div className="flex items-start gap-3">
-
-            <i className="ri-money-rupee-circle-fill mt-0.5 text-lg text-blue-600"></i>
-
-            <div>
-
-              <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-                Amount
-              </p>
-
-              <p className="mt-1 text-sm font-semibold text-gray-900">
-                ₹192
-              </p>
-
-            </div>
-
-          </div>
-
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-3">
-
+        {/* Action Buttons */}
+        <div className="grid grid-cols-2 gap-3 pt-1">
           <button
-            onClick={() => setConfirmRideOpen(false)}
             type="button"
-            className="w-full rounded-2xl border border-gray-300 bg-white py-3 font-semibold text-gray-700"
+            onClick={onIgnore}
+            className="w-full py-3 px-4 rounded-xl border border-gray-300 bg-white text-gray-700 font-semibold hover:bg-gray-50 active:scale-[0.99] transition text-sm"
           >
             Ignore
           </button>
-
           <button
-            onClick={() => {
-              setConfirmRideOpen(false)
-              setConformridepanel(true)
-            }}
             type="button"
-            className="w-full rounded-2xl bg-black py-3 font-semibold text-white"
+            onClick={() => onAccept(ride)}
+            className="w-full py-3 px-4 rounded-xl bg-black hover:bg-gray-800 active:scale-[0.99] text-white font-bold transition text-sm flex items-center justify-center gap-1.5 shadow-md"
           >
-           Accept
+            <span>Accept Ride</span>
+            <i className="ri-arrow-right-line"></i>
           </button>
-
         </div>
-
       </div>
-
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default RidePopup
+export default Raidepopup;

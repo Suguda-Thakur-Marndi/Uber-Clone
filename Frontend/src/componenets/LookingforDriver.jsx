@@ -1,64 +1,53 @@
-import React from 'react'
+import React from 'react';
 
-const LookingforDriver = (props) => {
+const LookingforDriver = ({ pickup, destination, fare, selectedVehicle, onCancel }) => {
   return (
-    <div className="p-5 space-y-4">
-        <button 
-          type="button"
-          onClick={()=>{
-            props.onClose?.()
-          }}
-          className="text-gray-600 hover:text-gray-900 transition mb-2"
-          aria-label="Close"
-        >
-         <i className="ri-arrow-down-line text-xl" aria-hidden="true"></i>
-        </button>
-        
-        <h3 className="text-2xl font-bold text-gray-900">Looking for Driver...</h3>
-        
-        <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-          <div className="flex items-center gap-4 bg-white rounded-lg p-3 border-2 border-gray-200 hover:border-black transition">
-            <img className="h-24 w-24 object-cover rounded" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="Uber Go vehicle" /> 
-            <div className="flex-1">
-              <h4 className="font-bold text-lg">Uber Go</h4>
-              <p className="text-gray-600 text-sm">Affordable, Compact rides</p>
-             
-            </div>
-          </div>
+    <div className="p-6 max-w-lg mx-auto space-y-5 text-center">
+      {/* Radar Animation */}
+      <div className="relative mx-auto w-24 h-24 flex items-center justify-center">
+        <div className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping"></div>
+        <div className="absolute inset-2 rounded-full bg-emerald-500/30 animate-pulse"></div>
+        <div className="relative z-10 w-16 h-16 rounded-full bg-black text-white flex items-center justify-center shadow-xl">
+          <i className="ri-car-fill text-2xl text-emerald-400"></i>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 space-y-3">
-          <div className="flex items-start gap-3">
-            <i className="ri-map-pin-user-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-            <div>
-              <p className="text-xs text-gray-500">Current Location</p>
-              <p className="text-sm font-medium text-gray-900">{props.currentLocation || props.pickup || 'Location not set'}</p>
-            </div>
-          </div>
+      </div>
 
-          <div className="border-t border-gray-200"></div>
+      <div>
+        <h3 className="text-2xl font-bold text-gray-900">Contacting nearby drivers...</h3>
+        <p className="text-xs text-gray-500 mt-1">Please wait while the closest driver accepts your request</p>
+      </div>
 
-          <div className="flex items-start gap-3">
-            <i className="ri-map-pin-2-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-            <div>
-              <p className="text-xs text-gray-500">Destination</p>
-              <p className="text-sm font-medium text-gray-900">{props.destination || 'Destination not set'}</p>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-200"></div>
-
-          <div className="flex items-start gap-3">
-            <i className="ri-money-rupee-circle-fill text-lg text-gray-700 mt-1" aria-hidden="true"></i>
-            <div>
-              <p className="text-xs text-gray-500">Amount</p>
-              <p className="text-sm font-medium text-gray-900">{props.fare || props.price || '₹192'}</p>
-            </div>
-          </div>
+      <div className="bg-gray-50 rounded-2xl border border-gray-200 p-4 space-y-3 text-left">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase text-gray-500">Vehicle</span>
+          <span className="text-sm font-bold text-gray-900">{selectedVehicle?.name || 'Uber Go'}</span>
         </div>
-        
-        
+        <div className="border-t border-gray-200"></div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase text-gray-500">Pickup</span>
+          <span className="text-sm font-medium text-gray-800 truncate max-w-[200px]">{pickup}</span>
+        </div>
+        <div className="border-t border-gray-200"></div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase text-gray-500">Destination</span>
+          <span className="text-sm font-medium text-gray-800 truncate max-w-[200px]">{destination}</span>
+        </div>
+        <div className="border-t border-gray-200"></div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase text-gray-500">Estimated Fare</span>
+          <span className="text-base font-extrabold text-emerald-600">{fare || '₹160'}</span>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={onCancel}
+        className="w-full py-3 px-4 rounded-xl border-2 border-red-200 bg-red-50 text-red-700 font-bold hover:bg-red-100 active:scale-[0.99] transition"
+      >
+        Cancel Search
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default LookingforDriver
+export default LookingforDriver;

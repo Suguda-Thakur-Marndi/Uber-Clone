@@ -1,32 +1,5 @@
-import { createContext, useState } from 'react';
+import DriverProvider, { DriverDataContext } from './DriverContext';
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const CaptainDataContext = createContext();
-
-const CaptainContext = ({ children }) => {
-    const [ captain, setCaptain ] = useState(null);
-    const [ isLoading, setIsLoading ] = useState(false);
-    const [ error, setError ] = useState(null);
-
-    const updateCaptain = (captainData) => {
-        setCaptain(captainData);
-    };
-
-    const value = {
-        captain,
-        setCaptain,
-        isLoading,
-        setIsLoading,
-        error,
-        setError,
-        updateCaptain
-    };
-
-    return (
-        <CaptainDataContext.Provider value={value}>
-            {children}
-        </CaptainDataContext.Provider>
-    );
-};
-
-export default CaptainContext;
+// Export Captain aliases for backwards compatibility
+export const CaptainDataContext = DriverDataContext;
+export default DriverProvider;

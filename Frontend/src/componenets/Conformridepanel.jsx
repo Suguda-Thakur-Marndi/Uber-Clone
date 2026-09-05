@@ -1,182 +1,124 @@
-import React, { useState, useRef, useEffect } from 'react'
-import gsap from "gsap"
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
 
-const Conformridepanel = ({ setConformridepanel }) => {
-  const [isOpen, setIsOpen] = useState(true)
-  const panelRef = useRef(null)
-  const panelclose = useRef(null)
+const Conformridepanel = ({ ride, onStartTrip, onCancelTrip, isStarting }) => {
+  const [otp, setOtp] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
- 
-  const bookingUser = {
-    name: 'Rahul Sharma',
-    phone: '+91 98765 43210',
-    rating: 4.8,
-    pickup: 'KIIT Square, Bhubaneswar',
-    dropoff: 'Railway Station',
-    amount: '₹192',
-    distance: '2 km',
-    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=48&h=48&fit=crop'
-  }
+  if (!ride) return null;
 
-  useEffect(() => {
-    if (!panelRef.current || !panelclose.current) return
-    if (isOpen) {
-      gsap.to(panelRef.current, { height: '55%', duration: 0.5 })
-      gsap.to(panelclose.current, { opacity: 1, duration: 0.3 })
-    } else {
-      gsap.to(panelRef.current, { height: '0%', duration: 0.5 })
-      gsap.to(panelclose.current, { opacity: 0, duration: 0.3 })
-      const t = setTimeout(() => setConformridepanel(false), 500)
-      return () => clearTimeout(t)
+  const user = ride.user || {};
+  const userName = user.fullname ? `${user.fullname.firstname} ${user.fullname.lastname || ''}`.trim() : 'Customer';
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!otp || otp.trim().length < 4) {
+      setErrorMsg('Please enter the 6-digit OTP from the customer');
+      return;
     }
-  }, [isOpen, setConformridepanel])
+    setErrorMsg('');
+    onStartTrip(otp.trim());
+  };
+
   return (
-    <div>
-    <div
-      ref={panelRef} onClick={() => setIsOpen(false)}
-      className="fixed bottom-0 z-50 w-full overflow-hidden rounded-t-3xl bg-white shadow-2xl"
-      style={{ height: "0%" }}
-    >
-
-      <div className="p-3">
-
-        <div
-          ref={panelclose}
-          className="mx-auto mb-4 h-1.5 w-12 cursor-pointer rounded-full bg-gray-300"
-        />
-
-        <div className="flex items-start justify-between gap-4">
-
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pointer-events-auto">
+      <div className="bg-white rounded-3xl p-5 shadow-2xl border border-gray-100 max-w-md mx-auto space-y-4 animate-in fade-in slide-in-from-bottom duration-300">
+        <div className="flex items-center justify-between pb-2 border-b border-gray-100">
           <div>
-
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600">
-              New ride request
-            </p>
-
-            <h3 className="mt-1 text-2xl font-bold text-gray-900">
-              A new ride is available!
-            </h3>
-
+            <span className="text-xs font-semibold uppercase tracking-wider text-emerald-600">Arrived at Pickup</span>
+            <h3 className="text-xl font-bold text-gray-900 mt-0.5">Pickup Customer</h3>
           </div>
-
-          <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-            2 km away
-          </span>
-
+          <span className="text-xl font-extrabold text-gray-900">₹{ride.fare || 160}</span>
         </div>
 
-        <div className="mt-5 flex items-center gap-4 rounded-2xl bg-gray-50 p-4">
-
-          <img
-            src={bookingUser.avatar}
-            alt="Customer"
-            className="h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-sm"
-          />
-
-          <div className="min-w-0 flex-1">
-
-            <p className="text-sm text-gray-500">Customer</p>
-
-            <p className="truncate text-lg font-semibold text-gray-900">{bookingUser.name}</p>
-
-            <p className="text-sm text-gray-500">{bookingUser.phone} • ⭐ {bookingUser.rating}</p>
-
-          </div>
-
-          <div className="text-right">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600">{bookingUser.distance}</p>
-            <p className="text-sm font-semibold text-gray-900">{bookingUser.amount}</p>
-          </div>
-
-        </div>
-
-        <div className="mt-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-
-          <div className="flex items-start gap-3">
-
-            <i className="ri-map-pin-user-fill mt-0.5 text-lg text-emerald-600"></i>
-
+        {/* Customer card */}
+        <div className="flex items-center justify-between bg-gray-50 p-3.5 rounded-2xl border border-gray-200">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=64&h=64&fit=crop"
+              alt="Customer"
+              className="h-12 w-12 rounded-full object-cover border"
+            />
             <div>
-
-              <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-                Current Location
-              </p>
-
-              <p className="mt-1 text-sm font-semibold text-gray-900">
-                KIIT Square, Bhubaneswar
-              </p>
-
+              <h4 className="font-bold text-sm text-gray-900">{userName}</h4>
+              <p className="text-xs text-gray-500">{user.email || 'Verified Rider'}</p>
             </div>
-
           </div>
-
-          <div className="my-4 border-t border-dashed border-gray-200"></div>
-
-          <div className="flex items-start gap-3">
-
-            <i className="ri-map-pin-2-fill mt-0.5 text-lg text-red-500"></i>
-
-            <div>
-
-              <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-                Destination
-              </p>
-
-              <p className="mt-1 text-sm font-semibold text-gray-900">
-                Railway Station
-              </p>
-
-            </div>
-
-          </div>
-
-          <div className="my-4 border-t border-dashed border-gray-200"></div>
-
-          <div className="flex items-start gap-3">
-
-            <i className="ri-money-rupee-circle-fill mt-0.5 text-lg text-blue-600"></i>
-
-            <div>
-
-              <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-                Amount
-              </p>
-
-              <p className="mt-1 text-sm font-semibold text-gray-900">
-                ₹192
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div className="mt-5 grid grid-cols-2 gap-3">
-
-          <button
-            onClick={() => setIsOpen(false)}
-            className="w-full rounded-2xl border border-gray-300 bg-red-500 py-3 font-bold text-white text-center block"
+          <a
+            href="tel:+919876543210"
+            className="h-10 w-10 bg-black text-white rounded-full flex items-center justify-center shadow-xs hover:bg-gray-800 transition"
+            aria-label="Call passenger"
           >
-            Cancel
-          </button>
-
-          <Link 
-            to="/Captainride"
-            onClick={() => setIsOpen(false)}
-            className="w-full rounded-2xl bg-black py-3 font-semibold text-white text-center block"
-          >
-            Confirm
-          </Link>
-
+            <i className="ri-phone-fill text-lg"></i>
+          </a>
         </div>
 
+        {/* Route Details */}
+        <div className="space-y-2.5 bg-white p-3 rounded-2xl border border-gray-200 text-sm">
+          <div className="flex items-start gap-2.5">
+            <i className="ri-map-pin-user-fill text-emerald-600 mt-0.5"></i>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-semibold uppercase text-gray-400">Pickup</p>
+              <p className="text-xs font-medium text-gray-800 truncate">{ride.pickup}</p>
+            </div>
+          </div>
+          <div className="border-t border-gray-100"></div>
+          <div className="flex items-start gap-2.5">
+            <i className="ri-map-pin-2-fill text-red-500 mt-0.5"></i>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-semibold uppercase text-gray-400">Drop-off</p>
+              <p className="text-xs font-medium text-gray-800 truncate">{ride.destination}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* OTP Input Form */}
+        <form onSubmit={handleSubmit} className="space-y-3 pt-1">
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+              Enter 6-Digit Passenger OTP
+            </label>
+            <input
+              type="text"
+              maxLength={6}
+              value={otp}
+              onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+              placeholder="e.g. 123456"
+              className="w-full text-center tracking-[0.3em] font-mono text-2xl font-bold py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none focus:bg-white transition"
+              required
+            />
+            {errorMsg && <p className="text-xs text-red-600 font-medium mt-1">{errorMsg}</p>}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 pt-1">
+            <button
+              type="button"
+              onClick={onCancelTrip}
+              className="w-full py-3 px-4 rounded-xl border border-gray-300 bg-white text-gray-700 font-semibold hover:bg-gray-50 text-sm transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isStarting}
+              className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold text-sm transition flex items-center justify-center gap-1.5 shadow-md disabled:opacity-50"
+            >
+              {isStarting ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span>Verifying...</span>
+                </>
+              ) : (
+                <>
+                  <span>Start Trip</span>
+                  <i className="ri-play-fill text-base"></i>
+                </>
+              )}
+            </button>
+          </div>
+        </form>
       </div>
-
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Conformridepanel
+export default Conformridepanel;
